@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'Rosehot';
+    src: url(./Fonts/Rosehot.ttf);
+}
+
+
+.name{
+    border: 3px solid gold;
+    border-radius: 15px;
+}
+
+.Username{
+    color: white;
+    font-family: Rosehot;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.ProfileEdit{
+    overflow-x: hidden;
+    height: 100vh;
+    background-color: black;
+    display: grid;
+    place-content: center;
+}
+
+.form {
+    .img{
+        position: relative;
+        left: 2rem;
+        top: 2.9rem;
+    }
+
+    img{
+        position: relative;
+        top: -2rem;
+        left: 2rem;
+    }
+
+
+    border: 2px solid white;
+    background-image: url(../Images/Aboutbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 25rem;
+    height: 80vh;
+
+
+button{
+    position: relative;
+    top: -1rem;
+    font-family: Rosehot;
+    color: white;
+    height: 3rem;
+    font-weight: 800;
+    background-color: gold;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.updateImage{
+    margin-top: 1rem;
+    top: 1rem;
+    position: relative;
+}
+}

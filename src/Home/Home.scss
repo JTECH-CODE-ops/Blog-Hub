@@ -1,0 +1,344 @@
+@font-face {
+    font-family: 'Rosehot';
+    src: url(../Fonts/Rosehot.ttf);
+}
+
+@font-face {
+    font-family: 'Rantaro';
+    src: url(../Fonts/Rantaro-Demo.otf);
+}
+
+.Menu{
+   text-align: center;
+    margin-top: 1rem;
+    border-radius: 8px;
+    padding-bottom: 4rem;
+    animation: menu 0.5s ;
+    position: relative;
+
+    .noCount{
+        background-color: red;
+        display: grid;
+        place-content: center;
+        width: 17px;
+        border-radius: 20px;
+        height: 18px;
+    }
+
+    .countNotify{
+        position: relative;
+        top: 8px;
+        left: 18px;
+        gap: 2px;
+    }
+
+    p{
+      transition: color 0.5s ease-in-out;  
+    }
+
+    p:hover{
+        color: blue;
+    }
+}
+
+button{
+    cursor: pointer;
+}
+
+@keyframes menu{
+    from{left: 2rem;}
+    to{left: 0.1rem;}
+}
+
+.header3{
+    font-family: Rosehot;
+}
+
+.header2 {
+    .profileImage{
+        width: 4rem;
+        border-radius: 50%;
+    }
+
+    overflow-y: scroll;
+    height: 100vh;
+    overflow-x: hidden;
+
+    span {
+        font-size: 24px;
+    }
+
+    .UserPost {
+        font-family: Mozilla;
+
+        span {
+            font-size: 15px;
+        }
+    }
+
+    .UserContent {
+        background-color: whitesmoke;
+        box-shadow: 3px 3px 3px 3px whitesmoke;
+        padding: 10px 10px;
+        width: 55rem;
+        height: 20rem;
+        font-family: Rosehot;
+        overflow-y: scroll;
+
+        h2{
+            font-weight: 900;
+        }
+    }
+
+    .User_id{
+        font-family: monospace;
+        font-weight: 900;
+    }
+
+    .Comment{
+        display: flex;
+        place-content: center;
+        height: 28px;
+        padding-top: 4px;
+        margin-bottom: 20rem;
+        border-radius: 5px;
+        width: 45px;
+        background-color: rgb(223, 218, 218);
+    }
+
+    .Like{
+        position: relative;
+        border-radius: 5px;
+        height: 28px;
+        top: 2.3rem;
+        right: 20rem;
+        background-color: rgb(223, 218, 218);
+        display: flex;
+        place-content: center;
+    }
+}
+
+.header {
+    font-family: Rosehot;
+
+     .BlogHub{
+        font-family: Rosehot;
+        display: flex;
+    }
+
+    button {
+        margin-top: 2px;
+        background-color: gold;
+        padding: 6px;
+        border-radius: 5px;
+        font-family: Rosehot;
+        font-weight: 600;
+        transition: background-color 0.5s ease-in-out;
+    }
+
+    button:hover {
+        background-color: black;
+        color: white;
+    }
+}
+
+
+
+@media (max-width:500px) {
+    .UserPost {
+        width: 30rem;
+        position: relative;
+        left: -2rem;
+    }
+}
+
+
+
+
+.formBlogs {
+    font-family: Rosehot;
+    display: inline-flex;
+    flex-direction: column;
+    display: grid;
+    place-items: center;
+    gap: 3rem;
+    background-color: rgb(49, 47, 47);
+    height: 130vh;
+
+    .label {
+        background-color: white;
+        width: 3rem;
+        border-radius: 8px;
+        height: 3rem;
+        position: relative;
+        left: -5.8rem;
+        top: -2rem;
+        transition: background-color 0.5s ease-in-out;
+    }
+
+    .label:hover{
+        background-color: gold;
+    }
+
+    h1 {
+        color: white;
+        font-family: Rosehot;
+        align-items: center;
+        font-size: 32px;
+    }
+
+    span {
+        font-family: Rosehot;
+        align-items: center;
+        margin-left: 2rem;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        bottom: 7.5rem;
+    }
+
+
+    label {
+        font-family: Rosehot;
+        align-items: center;
+        margin-left: 2rem;
+        color: white;
+        cursor: pointer;
+        margin-right: 2rem;
+
+    }
+
+    .httpLink{
+        position: relative;
+        top: -10px;
+        left: 28px;
+        display: grid;
+        textarea{
+            height: 2rem;
+        }
+    }
+
+    input {
+        outline: none;
+        border-radius: 20px;
+        border: 4px solid gold;
+        font-family: Rosehot;
+        width: 18rem;
+        height: 5rem;
+    }
+
+    textarea {
+        outline: none;
+        border-radius: 20px;
+        border: 4px solid gold;
+        width: 18rem;
+        margin-right: 2.2rem;
+        height: 10rem;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+        background-color: black;
+        width: 30vw;
+        border-radius: 8px;
+        padding: 5px;
+        color: white;
+        font-family: Rosehot;
+        position: relative;
+        top: -8rem;
+        transition: background-color 0.5s ease-in-out;
+    }
+
+    button:hover{
+        background-color: white;
+        color: black;
+    }
+
+  ::placeholder{
+    opacity: 50%;
+    color: white;
+  }
+}
+
+h3{
+    text-align: center;
+    font-size: larger;
+   font-family: Rosehot; 
+}
+
+.Online{
+    display: grid;
+    place-content: center;
+    position: relative;
+    top: 2rem;
+    font-family: Rosehot;
+}
+
+@media(max-width: 500px) {
+    .Latest {
+        position: relative;
+        top: -1rem;
+    }
+
+    .profileImage{
+        width: 3rem;
+    }
+
+    .User_id {
+        span {
+            position: relative;
+            top: 0.3rem;
+            width: 20rem;
+        }
+    }
+
+    .Add {
+        position: relative;
+        top: -9rem;
+    }
+
+    .Loading {
+        position: relative;
+        left: 2rem;
+    }
+
+    .Content {
+        margin-left: 1rem;
+    }
+
+    span {
+        position: relative;
+        top: -8.5rem;
+    }
+
+    .formBlogs {
+        height: 150vh;
+        width: 30rem;
+    }
+
+    .UserContent {
+        background-color: bisque;
+        box-shadow: 3px 3px 3px 3px wheat;
+        padding: 10px 10px;
+        width: 55rem;
+        height: 20rem;
+        overflow-y: scroll;
+        position: relative;
+        left: -2rem;
+    }
+}
+ .AlertNotify{
+        display: flex;
+        place-content: center;
+        font-family: Rosehot;
+        gap: 1rem;
+
+        p1{
+            background-color: gold;
+            padding-top: 10px;
+            padding-left: 10px;
+            border-radius: 8px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+        }
+    }

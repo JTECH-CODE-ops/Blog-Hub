@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'Mozilla';
+    src: url(../Fonts//Afterglow-Regular.ttf);
+}
+@font-face {
+    font-family: 'Rosehot';
+    src: url(./Fonts/Rosehot.ttf);
+}
+
+p {
+    font-family: Rosehot;
+}
+
+
+
+.ALLPROFILES {
+    overflow-x: hidden;
+    display: grid;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    // height: 105vh;
+    background-repeat: no-repeat;
+    background-image: url(./Images/Image-1-1.png);
+
+    .bgIdentities{
+        display: grid;
+        justify-content: center;
+    }
+
+    .bgProfile {
+        border-bottom: 4px solid white;
+        height: 7.5rem;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: wheat;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+
+         .EditButton {
+            margin-top: 4.5rem;
+        button {
+            color: white;
+            background-color: black;
+            padding: 6px;
+            border-radius: 200px;
+
+        }
+    }
+
+    
+    .Profileimage {
+        width: 5.5rem;
+        margin-top: 3rem;
+        img{
+            width: 5rem;
+            height: 5rem;
+        }
+    }
+    }
+
+    .Profilename{
+        color: white;
+        margin-bottom: 2rem;
+        margin-left: -9rem;
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .Profileemail{
+        color: gold;
+         margin-left: -7rem;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .BIOPROFILE{
+        padding-bottom: 10px;
+        color: gold;
+        width: 20rem;
+        margin-left: -5.5rem;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .Profileid{
+        color: white;
+        margin-left: -7rem;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .Profile {
+        justify-content: center;
+        display: flex;
+        margin-top: 1rem;
+        
+        h1{
+            font-weight: 600;
+            font-family: Mozilla;
+            font-size: 32px;
+        }
+
+        .Link{
+           position: relative;
+           margin-top: 0.6rem;
+           left: -4rem;
+        }
+    }
+
+    .Load{
+        text-align: center;
+    }
+
+    .UserData {
+        border-radius: 10px;
+        display: grid;
+        justify-self: center;
+        height: 25rem;
+        width: 30rem;
+        background-color: rgb(8, 8, 8);
+    }
+
+     .Name{
+        font-weight: 800;
+        margin-left: 7rem;
+        font-size: 34px;
+    }
+
+    .Email{
+        margin-left: 5rem;
+    }
+
+    .Id{
+        position: relative;
+        left: 4rem;
+    }
+
+    .h2{
+        font-family: Rosehot;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 800;
+    }
+
+}
+
+
+
+
+
+
