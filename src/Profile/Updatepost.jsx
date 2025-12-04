@@ -72,59 +72,6 @@ const Updatepost = () => {
 
     reader.readAsDataURL(event.target.files[0])
   }
-  //   const handleSubmit = async (e) => {
-
-  //     e.preventDefault();
-  //     try {
-  //       setLoading(true)
-  //       // Upload image to Supabase Storage
-  // const { data: { user }} = await supabase.auth.getUser();
-
-
-  //       const { data, error } = await supabase
-  //         .storage
-  //         .from('bloggers')
-  //         .upload(`blog_${Date.now()}.jpg`, image);
-
-
-  //       if (error) {
-  //         setLoading(false)
-  //         toast.error('Something went wrong')
-  //         console.log(error);
-  //       } else {
-  //         setLoading(false)
-  //         const imageUrl = supabase.storage.from('bloggers').getPublicUrl(data.path).data.publicUrl;
-  //         toast.success('Post Created')
-  //         navigate("/")
-  //         // Create a new blog post in Supabase database
-  //         const { data: blogPostData, error: blogPostError } = await supabase
-  //           .from('blog_post')
-  //           .insert([
-  //             {
-  //               image_url: imageUrl,
-  //               Link: link,
-  //               Content: content,
-  //               Title: title,
-  //               user_id: user.id,  
-  //               created_at: new Date().toISOString(),        
-  //              },
-  //           ]);
-
-  //         if (blogPostError) {
-  //           setLoading(false)
-  //           console.error(blogPostError);
-  //         } else {
-  //           console.log(blogPostData);
-  //           console.log(data)
-  //          console.log(user)
-  //         }
-  //       }
-  //     } catch (error) {
-  //       setLoading(false)
-  //       console.error(error);
-  //       console.log(error.response)
-  //     }
-  //   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -181,10 +128,11 @@ const Updatepost = () => {
         .eq('id', postId);
 
       if (error) {
+        toast.error('Update Failed')
         setLoading(false)
         console.error(error);
       }
-      toast.success('Good')
+      toast.success('Update Successful')
       console.log(data)
       navigate('/')
     } catch (error) {

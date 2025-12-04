@@ -4,6 +4,7 @@ import { FaCamera } from "react-icons/fa";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa"
 import './Edit.scss'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
   const [username, setUsername] = useState('');
@@ -43,45 +44,17 @@ const Profile = () => {
         },
       });
       if (error) {
+        toast.error('Check your network')
         console.error(error);
       } else {
         console.log(data)
-        console.log('Profile updated successfully!');
+        toast.success('Profile updated successfully!');
       }
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-
-    // try {
-    //   const { data, error } = await supabase.storage
-    //     .from('bloggers')
-    //     .upload(`${username}/${email}`, profileImage);
-    //   if (error) {
-    //     console.error(error);
-    //   } else {
-    //     const profileImageUrl = supabase.storage
-    //       .from('bloggers')
-    //       .getPublicUrl(data.path).data.publicUrl;
-    //     const { data: updateData, error: updateError } = await supabase.auth.updateUser({
-    //       data: {
-    //         avatar_url: profileImageUrl,
-    //       },
-    //     });
-    //     if (updateError) {
-    //       console.error(updateError);
-    //     } else {
-    //         console.log(updateData)
-    //       setProfileImageUrl(profileImageUrl);
-    //       console.log('Profile image updated successfully!');
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // } finally {
-    //   setLoading(false);
-    // }
 
     const { data, error } = await supabase.auth.getUser();
       const user = data.user
@@ -113,6 +86,7 @@ const Profile = () => {
         .from('bloggers')
         .upload(filePath, profileImage, { upsert: true });
       if (error) {
+      toast.error('Check your network or Try Again')
         console.error(error);
       } else {
         const profileImageUrl = supabase.storage
@@ -124,11 +98,12 @@ const Profile = () => {
           },
         });
         if (updateError) {
+          toast.error('Check your network')
           console.error(updateError);
         } else {
             console.log(updateData)
           setProfileImageUrl(profileImageUrl);
-          console.log('Profile image updated successfully!');
+          toast.success('Profile image Update, Successful')
         }
       }
     } catch (error) {

@@ -1,7 +1,7 @@
-// @font-face {
-//     font-family: 'Mozilla';
-//     src: url(./Fonts/MozillaHeadline-ExpandedBold.ttf);
-// }
+@font-face {
+    font-family: 'Rosehot';
+    src: url(../Fonts/Rosehot.ttf);
+}
 
 // p {
 //     font-family: Mozilla;
@@ -77,14 +77,5 @@
 // }
 
 .Otheruser{
-    background-color: rgb(34, 33, 33);
-    position: relative;
-    top: -3rem;
-    padding-top: 5rem;
-    height: 110vh;
     font-family: Rosehot;
-    h1{
-        margin-bottom: 3rem;
-        
-    }
 }

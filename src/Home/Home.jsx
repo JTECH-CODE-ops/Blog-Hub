@@ -66,7 +66,7 @@ const Home = () => {
       if (noError) {
         console.error(noError)
       } else {
-        console.log(noData)
+        // console.log(noData)
         setNotifications(noData)
       }
     }

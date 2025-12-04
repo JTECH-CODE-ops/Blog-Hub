@@ -1,106 +1,6 @@
-// import React, { useState, useEffect } from 'react';
-// import supabase  from '../supabaseClient';
-
-// const PostComments = ({ post }) => {
-//   const [comments, setComments] = useState([]);
-//   const [likes, setLikes] = useState([]);
-//   const [newComment, setNewComment] = useState('');
-//   const [liked, setLiked] = useState(false);
-//   const [user, setUser] = useState({});
-
-//   useEffect(() => {
-//     const fetchComments = async () => {
-//       const { data, error } = await supabase
-//         .from('comments')
-//         .select('*')
-//         .eq('post_id', post.id);
-//       if (error) console.error(error);
-//       else setComments(data);
-//     };
-//     const fetchLikes = async () => {
-//       const { data, error } = await supabase
-//         .from('likes')
-//         .select('*')
-//         .eq('post_id', post.id);
-//       if (error) console.error(error);
-//       else setLikes(data);
-//     };
-//     const fetchUser = async () => {
-//       const { data: { user } } = await supabase.auth.getUser();
-//       setUser(user);
-//     };
-//     fetchComments();
-//     fetchLikes();
-//     fetchUser();
-//   }, [post]);
-
-//   const handleComment = async () => {
-//     const { data, error } = await supabase
-//       .from('comments')
-//       .insert([{ post_id: post.id, user_id: user.id, content: newComment }]);
-//     if (error) console.error(error);
-//     else setComments((prevComments) => [...prevComments, data]);
-//     setNewComment('');
-//   };
-
-//   const handleLike = async () => {
-//     const { data, error } = await supabase
-//       .from('likes')
-//       .insert([{ post_id: post.id, user_id: user.id }]);
-//     if (error) console.error(error);
-//     else setLikes((prevLikes) => [...prevLikes, data]);
-//     setLiked(true);
-//     // Send notification to post author
-//     const { data: postAuthor } = await supabase
-//       .from('users')
-//       .select('id')
-//       .eq('id', post.user_id)
-//       .single();
-//     const { data: notification } = await supabase
-//       .from('notifications')
-//       .insert([{ user_id: postAuthor.id, post_id: post.id, type: 'like', content: `${user.username} liked your post` }]);
-//   };
-
-//   const handleUnlike = async () => {
-//     const { data, error } = await supabase
-//       .from('likes')
-//       .delete()
-//       .eq('post_id', post.id)
-//       .eq('user_id', user.id);
-//     if (error) console.error(error);
-//     else setLikes((prevLikes) => prevLikes.filter((like) => like.id !== data.id));
-//     setLiked(false);
-//   };
-
-//   return (
-//     <div>
-//       {/* <h2>{post.title}</h2> */}
-//       {/* <p>{post.content}</p> */}
-//       <ul>
-//         {comments.map((comment) => (
-//           <li key={comment.id}>{comment.content}</li>
-//         ))}
-//       </ul>
-//       <input
-//         type="text"
-//         value={newComment}
-//         onChange={(e) => setNewComment(e.target.value)}
-//       />
-//       <button onClick={handleComment}>Comment</button>
-//       {liked ? (
-//         <button onClick={handleUnlike}>Unlike</button>
-//       ) : (
-//         <button onClick={handleLike}>Like</button>
-//       )}
-//       <p>Likes: {likes.length}</p>
-//     </div>
-//   );
-// };
-
-// export default PostComments;
-
 import React, { useState, useEffect } from 'react';
 import  supabase  from '../supabaseClient';
+import { FaRegArrowAltCircleLeft } from "react-icons/fa"
 import './Design.scss'
 import { useParams, Link } from 'react-router-dom';
 import { BsFillSendFill } from "react-icons/bs";
@@ -154,7 +54,7 @@ fetchComments()
         event: 'INSERT',
         schema: 'public',
         table: 'Comments',
-        // filter: `post_id=eq.${postId}`,
+        filter: `post_id=eq.${postId}`,
     },
     async (payload) => {
       const { data : userData} = await supabase
@@ -259,6 +159,7 @@ try{
 
       if(postError) {
         console.log(postError)
+        setLoading(false)
       }else {
         const recipientId = post.user_id;
         const { data: notificationData, error: notificationError } = await supabase
@@ -293,7 +194,9 @@ try{
 
   return (
     <div>
-      {readers}
+      <div className=''>
+                      <Link to='/'><p className='mb-7 relative text-2xl text-amber-400'><FaRegArrowAltCircleLeft /></p></Link>
+                    </div>
       {post && (
       <div className='PostContent'>
         <div className='PostContent1'>
@@ -307,9 +210,9 @@ try{
     <div className='AllComments'>
         <div className='HeadComment'>
           {subscriptionStatus ===  'SUBSCRIBED' ? (
-            <p className='text-5xl text-amber-400'>Suscribed to comments</p>
+            <p className='text-5xl text-amber-400'></p>
           ) : (
-            <p className='text-5xl text-amber-300'>ERROR Suscribing to comments: {subscriptionStatus}</p>
+            <p className='text-5xl text-amber-300'></p>
           )}
         <h1>All Comments</h1>
         </div>

@@ -28,6 +28,7 @@ const Profile = () => {
         setLoading(false)
         const { data, error } = await supabase.auth.getUser();
         if (error) {
+          toast.error('Failed to Load User DATA')
           setLoading(false)
           console.error(error);
         } else {
@@ -168,45 +169,6 @@ const Profile = () => {
       <h2 className='ml-9 h2'>Posts</h2>
 
       {posts.map((blog) => (
-
-
-
-        // <div key={post.id} className='grid justify-center UserProfilePost mb-14 mt-5'>
-        //   <div className=' flex gap-3 relative right-32 User_id'>
-        //     <p1 className=' w-[2.5rem] h-[2rem] rounded-full'><UserAvatar key={post.id} user={post.profiles} size={40} /></p1> {/* <img src={blog.profiles?.avatar_url || UserImage} className='profileImage w-[2rem] h-[2rem] rounded-full' /></p1> */}
-        //     <div className='w-[2rem]'>
-        //       <span className=''><Link to={`/profile/${post.profiles.user_name}`}>{post.profiles?.user_name}</Link></span>
-        //     </div>
-        //   </div>
-        //   <div></div>
-        //   {/* post content */}
-        //   <div className=''>
-        //     <div className=''>
-        //       <a
-        //         href={post.Link}
-        //         className='text-blue-700 underline'>{post.Link} </a>
-        //     </div>
-        //     <div><p className=''>Posted {new Date(post.created_at).toDateString()}</p></div>
-        //     <h2 className='text-2xl'>{post.Title}</h2>
-        //     <p className='text-[12px]'>{post.Content}</p>
-        //     <div>
-        //       <img src={post.image_url} className='' alt='NO IMAGE' />
-        //     </div>
-        //     {/* <Like postId={blog.id} /> */}
-        //   </div>
-        //   <Link to={`/post/${post.id}/comments`}>
-        //     <div className=''>
-        //       <FaRegCommentAlt className='' />
-        //       <p className='commentCount ml-2 mt-[-5px]'>{post?.comment_count || 0}</p>
-        //     </div>
-        //     <Link to='/'>
-        //       <div className=''>
-        //         <Like postId={post.id} />
-        //       </div>
-        //     </Link>
-        //   </Link>
-
-        // </div>
         <div className='header2 grid grid-cols-1 ml-7'>
           <div key={blog.id} onClick={UserProfilePage} className='UserPost mb-14 flex justify-center mt-5'>
             {/* user profile */}
