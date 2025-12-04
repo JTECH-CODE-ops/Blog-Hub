@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { IoMail } from "react-icons/io5";
+import { FaRegArrowAltCircleLeft } from "react-icons/fa"
+import { Link } from 'react-router-dom';
 
 const Documentation = () => {
    const [result, setResult] = useState("");
@@ -21,6 +23,9 @@ const Documentation = () => {
   
   return (
     <div className='mt-5 Contact max-md:mt-25 flex place-content-center'>
+      <div className=''>
+                          <Link to='/'><p className='mb-7 relative left-55 bottom-15 text-2xl text-amber-400'><FaRegArrowAltCircleLeft /></p></Link>
+                      </div>
       <div className='Contact1'>
       <div className='flex mail text-white mb-5 mt-3 place-content-center'><IoMail/></div>
        <div className='flex text-white font-bold place-content-center'>Get in touch</div>

@@ -168,7 +168,7 @@ const Home = () => {
       try {
         const { data, error } = await supabase.auth.getUser();
         if (error) {
-          navigate("/register")
+          navigate("/login")
           console.error(error);
         } else {
           setUserProfile(data.data || data.user);
@@ -310,7 +310,7 @@ const Home = () => {
             </li>
           ))}
          </ul> */}
-          <img src={imageHead} className='w-[36rem] h-[20rem]' />
+          <img src={imageHead} className='w-[36rem] left-2 relative h-[20rem]' />
         </div>
 
         <div className='header3 flex justify-center'>
