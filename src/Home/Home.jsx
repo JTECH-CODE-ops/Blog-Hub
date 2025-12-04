@@ -310,7 +310,7 @@ const Home = () => {
             </li>
           ))}
          </ul> */}
-          <img src={imageHead} className='w-[36rem] left-2 relative h-[20rem]' />
+          <img src={imageHead} className='w-[36rem] left-4 relative h-[20rem]' />
         </div>
 
         <div className='header3 flex justify-center'>
