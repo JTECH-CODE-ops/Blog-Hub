@@ -55,7 +55,7 @@ const ProfilePage = () => {
   if (!user) return <p>Loading...</p>;
 
   return (
-    <div className="Otheruser flex flex-col h-[80rem]  items-center mt-10">
+    <div className="Otheruser flex flex-col h-[80rem]  items-center m">
       <div className=''>
                       <Link to='/'><p className='mb-7 relative -left-42 text-2xl text-amber-400'><FaRegArrowAltCircleLeft /></p></Link>
                     </div>
@@ -65,7 +65,7 @@ const ProfilePage = () => {
         className="w-24 h-24 rounded-full mb-4"
       />
       <h1 className="Name text-2xl font-semibold text-black">@{user.user_name}</h1>
-      <h1 className="text-xl font-semibold text-black">{user.Bio}</h1>
+      <h1 className="text-[12px] font-semibold text-black">{user.Bio}</h1>
       <h1 className="text-2xl font-semibold items-center gap-3 flex text-green-500"><FaCircleCheck/>{user.Badge || 'not Verified'}</h1>
    
    
@@ -81,7 +81,7 @@ const ProfilePage = () => {
             </div>
             <div></div>
             {/* post content */}
-            <div className='UserContent relative top-12'>
+            <div className='UserContent relative mr-10 top-12'>
               <div className=''>
                 <a
                   href={blog.Link}

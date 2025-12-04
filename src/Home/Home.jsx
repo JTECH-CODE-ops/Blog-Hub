@@ -168,6 +168,7 @@ const Home = () => {
       try {
         const { data, error } = await supabase.auth.getUser();
         if (error) {
+          navigate("/register")
           console.error(error);
         } else {
           setUserProfile(data.data || data.user);
@@ -288,7 +289,7 @@ const Home = () => {
         <div>
           <h1 className='font-bold text-3xl text-purple-500'>Blog<p1 className='text-amber-200 text-2xl font-semibold'>hub</p1></h1>
         </div>
-        <div className='flex justify-end'>
+        <div className='flex justify-end w-50'>
           <Link to='/createBlog'><button className='text-white mr-3 flex items-center gap-2'>Post<FaSquarePlus className='text-2xl' /></button></Link>
           <Link to='/profile'>{userProfile && <img src={userProfile.user_metadata?.avatar_url} className='w-10 h-10 rounded-full border-2 border-amber-300' />}</Link>
           <button onClick={() => setToggle(true)} className='text-white mr-1 ml-2 flex items-center gap-2'>{toggle ? '' : Display}</button>
@@ -329,7 +330,7 @@ const Home = () => {
             </div>
             <div></div>
             {/* post content */}
-            <div className='UserContent relative -left-15 top-12'>
+            <div className='UserContent relative mr-5 top-12'>
               <div className=''>
                 <a
                   href={blog.Link}

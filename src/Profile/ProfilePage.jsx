@@ -173,7 +173,7 @@ const Profile = () => {
           <div key={blog.id} onClick={UserProfilePage} className='UserPost mb-14 flex justify-center mt-5'>
             {/* user profile */}
             <div className='flex gap-3 relative left-10 User_id'>
-              <p1 className='profileImage w-[2rem] h-[2rem] rounded-full'><UserAvatar key={blog.id} user={blog.profiles} size={40} /></p1> {/* <img src={blog.profiles?.avatar_url || UserImage} className='profileImage w-[2rem] h-[2rem] rounded-full' /></p1> */}
+              <p1 className='profileImage w-[2rem] relative left-7 h-[2rem] rounded-full'><UserAvatar key={blog.id} user={blog.profiles} size={40} /></p1> {/* <img src={blog.profiles?.avatar_url || UserImage} className='profileImage w-[2rem] h-[2rem] rounded-full' /></p1> */}
               <div className='w-[2rem]'>
                 <span className='flex'><Link to={`/profile/${blog.user_id}`}>{blog.profiles?.user_name}</Link></span>
               <button className='relative max-md:left-40 max-md:-top-4.5 -top-8 left-32 text-green-500' onClick={() => deletePost(blog.id)}><AiFillDelete className='text-xl'/></button>
@@ -197,12 +197,12 @@ const Profile = () => {
               {/* <Like postId={blog.id} /> */}
             </div>
             <Link to={`/post/${blog.id}/comments`}>
-              <div className='Comment  relative right-[25rem] top-[24rem]'>
+              <div className='Comment relative right-[23rem] top-[24rem]'>
                 <FaRegCommentAlt className='relative  -top-10rem text-[24px]]' />
                 <p className='commentCount ml-2 mt-[-5px]'>{blog?.comment_count || 0}</p>
               </div>
               <Link to=''>
-                <div className='Like'>
+                <div className='Like relative'>
                   <Like postId={blog.id} />
                 </div>
               </Link>
