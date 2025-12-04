@@ -47,7 +47,6 @@ const App = () => {
         </Routes>
       </BrowserRouter>
 
-
       <Notify />
     </div>
   )
