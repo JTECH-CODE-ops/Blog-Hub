@@ -22,6 +22,7 @@ import UserProfilePage from '../Display/DispalyProfile';
 import { toast } from 'react-toastify';
 import Like from '../Router/Like';
 import useAuthorPresence from '../Updates/AuthorPresence';
+import Logo from '../Images/BlogHb2.jpg'
 
 const Home = () => {
   const { onlineUsers } = useAuthorPresence()
@@ -287,7 +288,7 @@ const Home = () => {
       {/* header */}
       <div className='header grid grid-cols-2'>
         <div>
-          <h1 className='font-bold text-3xl text-purple-500'>Blog<p1 className='text-amber-200 text-2xl font-semibold'>hub</p1></h1>
+          <h1><img className='w-15 h-10' src={Logo} /></h1>
         </div>
         <div className='flex justify-end w-50'>
           <Link to='/createBlog'><button className='text-white mr-3 flex items-center gap-2'>Post<FaSquarePlus className='text-2xl' /></button></Link>

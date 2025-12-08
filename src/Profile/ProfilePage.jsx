@@ -28,7 +28,7 @@ const Profile = () => {
         setLoading(false)
         const { data, error } = await supabase.auth.getUser();
         if (error) {
-          toast.error('Failed to Load User DATA')
+          // toast.error('Failed to Load User DATA')
           setLoading(false)
           console.error(error);
         } else {
@@ -168,7 +168,12 @@ const Profile = () => {
       </div>
       <h2 className='ml-9 h2'>Posts</h2>
 
-      {posts.map((blog) => (
+      {posts.length === 0 ? (
+        <div className='grid mt-5 text-2xl place-content-center'><p className='font-bold'>No posts yet</p>
+        <Link to='/createBlog'><button className='NoB text-[16px] font-bold mt-5'>Create Posts</button></Link>
+        </div>
+        
+      ) : ( posts.map((blog) => (
         <div className='header2 grid grid-cols-1 ml-7'>
           <div key={blog.id} onClick={UserProfilePage} className='UserPost mb-14 flex justify-center mt-5'>
             {/* user profile */}
@@ -210,7 +215,7 @@ const Profile = () => {
           </div>
 
         </div>
-      ))}
+      )))}
 
 
     </div>
