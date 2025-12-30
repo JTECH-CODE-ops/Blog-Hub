@@ -3,52 +3,21 @@
     src: url(../Fonts/Rosehot.ttf);
 }
 
-.Bloghub{
-    position: relative;
-    top: -2rem;
-    left: 9rem;
-}
-
-p1{
-    transition: color 0.5s ease-in-out;
-}
-
-p1:hover{
-    color: blue;
-}
-
-.Faq{
-    overflow-x: hidden;
+.FaqMain{
     font-family: Rosehot;
-    height: 86em;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-image: url(../Images/3f86eec383ff3c2ef45f6fc17fb905a0.jpg);
-.Faq1{
-    background-color: black;
-    height: 36rem;
 }
 
-.Send{
-    margin-top: 2rem;
-    background-color: gold;
-    padding: 7px;
-    border-radius: 8px;
-    border: 3px solid white;
-    
+.dropDown{
+   background-color: wheat;
 }
 
-input{
-    text-align: center;
+.dropDown1{
+    background-color: rgb(172, 238, 216);
 }
-
-
-input::placeholder{
-    color: white;
+.conFaq{
+    background-color: white;
 }
-}
-
-.Top{
-    margin-left: -6rem;
+.conFaq1{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px whitesmoke;
 }

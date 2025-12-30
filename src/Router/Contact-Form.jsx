@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IoMail } from "react-icons/io5";
-import { FaRegArrowAltCircleLeft } from "react-icons/fa"
+import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 const Documentation = () => {
@@ -24,20 +24,20 @@ const Documentation = () => {
   return (
     <div className='mt-5 Contact max-md:mt-25 flex place-content-center'>
       <div className=''>
-                          <Link to='/'><p className='mb-7 relative left-55 bottom-15 text-2xl text-amber-400'><FaRegArrowAltCircleLeft /></p></Link>
+                          <Link to='/Faq'><p className='mb-7 relative left-55 bottom-15 text-2xl text-black'><FaArrowLeft /></p></Link>
                       </div>
       <div className='Contact1'>
       <div className='flex mail text-white mb-5 mt-3 place-content-center'><IoMail/></div>
        <div className='flex text-white font-bold place-content-center'>Get in touch</div>
    <form onSubmit={onSubmit} className='mt-4 text-white'>
     <label className='ml-5'>Name</label><br/>
-    <input required type='text' name='email' placeholder='Your name' className='ml-5 md:ml-7 mb-5 mt-4 outline-0 h-10 rounded-[8px] border-2 w-[24rem]'/>
+    <input required type='text' name='text' placeholder='Your name' className='ml-5 px-2 md:ml-7 mb-5 mt-4 outline-0 h-10 rounded-[8px] border-2 w-[24rem]'/>
     <label className='ml-5'>Email</label><br/>
-    <input required type='email' name='email' placeholder='Your email' className='ml-5 md:ml-7 mb-5 mt-4 outline-0 h-10 rounded-[8px] border-2 w-[24rem]'/>
+    <input required type='email' name='email' placeholder='Your email' className='ml-5 px-2 md:ml-7 mb-5 mt-4 outline-0 h-10 rounded-[8px] border-2 w-[24rem]'/>
     <label className='ml-5'>Phone No.</label><br/>
-    <input required type='number' name='email' placeholder='Phone number' className='ml-5 md:ml-7 mb-5 mt-4 outline-0 h-10 rounded-[8px] border-2 w-[24rem]'/>
+    <input required type='number' name='number' placeholder='Phone number' className='ml-5 px-2 md:ml-7 mb-5 mt-4 outline-0 h-10 rounded-[8px] border-2 w-[24rem]'/>
     <label className='ml-5'>Message</label><br/>
-    <textarea required type='text' name='email' placeholder='Please tell us how we can help you' className='ml-5 md:ml-7 mb-5 mt-4 outline-0 h-25 rounded-[8px] border-0 w-[24rem]'/>
+    <textarea required type='text' name='text' placeholder='Please tell us how we can help you' className='px-2 ml-5 md:ml-7 mb-5 mt-4 outline-0 h-25 rounded-[8px] border-0 w-[24rem]'/>
    <button type='submit' className='ml-4 md:ml-7 rounded-[8px] h-7 w-[24rem]'>Send</button>
    <p className='text-green-500 font-extrabold mt-8 ml-24 animate-bounce'>{result}</p>
    </form>

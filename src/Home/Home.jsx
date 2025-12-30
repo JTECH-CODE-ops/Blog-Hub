@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { TiThMenu } from "react-icons/ti";
 import './Home.scss'
 import { HiOutlineStatusOnline } from "react-icons/hi";
-import imageHead from '../Images/60bc027d360aec7bb7f504c9edc8f40d.jpg'
+import { MdVerified } from "react-icons/md";
+import imageHead from '../Images/134111-758552424_tiny.mp4'
 import { IoNotifications } from "react-icons/io5";
 import { LuLogOut } from "react-icons/lu";
 import { IoMenu } from "react-icons/io5";
@@ -10,19 +11,21 @@ import { FaRegCommentAlt } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
 import { FaQuestionCircle } from "react-icons/fa";
 import { RiCloseCircleFill } from "react-icons/ri";
+import { MdOutlineFileDownload } from "react-icons/md";
+import { ImCancelCircle } from "react-icons/im";
 import { FaRegUser } from "react-icons/fa";
 import { FaSquarePlus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import supabase from '../supabaseClient';
 import { ImSpinner6 } from "react-icons/im";
 import UserAvatar from '../Router/UserAvatar';
+import { FaSearch } from "react-icons/fa";
 import { useNotifications } from '../Router/NotifAlert';
-import ThumbNail from '../Images/no-image-icon-23485.png'
 import UserProfilePage from '../Display/DispalyProfile';
 import { toast } from 'react-toastify';
 import Like from '../Router/Like';
 import useAuthorPresence from '../Updates/AuthorPresence';
-import Logo from '../Images/BlogHb2.jpg'
+import Logo from '../Images/BlogHubLogo.jpg'
 
 const Home = () => {
   const { onlineUsers } = useAuthorPresence()
@@ -32,6 +35,7 @@ const Home = () => {
   const [userProfile, setUserProfile] = useState({});
   const [user, setUser] = useState(null)
   const [toggle, setToggle] = useState(false)
+   const [isImage, setIsImage] =  useState(null)
   //  const [subscriptionStatus, setSubscriptionStatus] = useState(null)
   const [notifications, setNotifications] = useState([])
   const navigate = useNavigate()
@@ -75,25 +79,27 @@ const Home = () => {
     fetchNotifications();
   }, [user])
 
-  
-      // const createProfileIfNotExists = async (user) => {
-      //   const {data: existingProfile, error} = await supabase
-      //   .from('profiles')
-      //   .select('*')
-      //   .eq('id', user.id)
-      
-      //   if(!existingProfile) {
-      //     await supabase
-      //     .from('profiles')
-      //     .insert({
-      //       id: user.id,
-      //       user_name: user.user_metadata.display_name ?? 'User',
-      //       avatar_url: user.user_metadata.avatar_url,
-      //     })
-      //   }else{
-      //     console.error('Google error', error)
-      //   }
-      // }
+  const handleDownloadImage = async () => {
+        try{
+            const response = await fetch(isImage)
+            const blob = await response.blob()
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = 'Blog_Hub_File.jpg';
+            a.click();
+            URL.revokeObjectURL(url);
+        }catch (error) {
+            console.error(error)
+        }
+     }
+
+   const handleImageClick = (imageUrl) => {
+            setIsImage(imageUrl)
+        }
+        const handleCloseImage = () => {
+            setIsImage(null)
+        }
 
   useEffect(() => {
     if (!user) return;
@@ -143,6 +149,7 @@ const Home = () => {
         <Link to='/Notify'><p className='countNotify text-white flex'><IoNotifications className='ml-[-20px] relative top-[0.1px] text-[1.5rem]' /><p1 className='noCount text-white relative text-[14px] top-0.5 left-22.5'>{notifications.length}</p1><p1 className='relative -left-5'>Notification</p1></p></Link>
         <p className='text-white' onClick={Logout}><LuLogOut className='relative top-[19px]' />Logout</p>
         <Link to='/Online-Users'><p className='text-white'><HiOutlineStatusOnline className='relative top-[18px]' />see Whose Online ?</p></Link>
+        <Link to='/Searchusers'><p className='text-white'><FaSearch className='relative top-[18px]' />Search</p></Link>
       </div>
     </h1>
   )
@@ -169,7 +176,7 @@ const Home = () => {
       try {
         const { data, error } = await supabase.auth.getUser();
         if (error) {
-          navigate("/login")
+          // navigate("/login")
           console.error(error);
         } else {
           setUserProfile(data.data || data.user);
@@ -185,9 +192,11 @@ const Home = () => {
         setLoading(true)
 
         const { data, error } = await supabase
-          .from('blog_post_with_comment_count')
-          .select(`*, profiles (id, user_name, avatar_url)`)
-          .order('created_at', { ascending: false });
+          .from('blog_post_with_comment_counts')
+          .select(`*, profiles (id, user_name, avatar_url, Badge)`)
+          .not('Title', 'is', null)
+          .order('created_at', { ascending: false })
+          
 
         if (error) {
           toast.error('Check Your Network Or Login Again')
@@ -290,7 +299,7 @@ const Home = () => {
         <div>
           <h1><img className='w-15 h-10' src={Logo} /></h1>
         </div>
-        <div className='flex justify-end w-50'>
+        <div className='flex justify-end max-md:w-50'>
           <Link to='/createBlog'><button className='text-white mr-3 flex items-center gap-2'>Post<FaSquarePlus className='text-2xl' /></button></Link>
           <Link to='/profile'>{userProfile && <img src={userProfile.user_metadata?.avatar_url} className='w-10 h-10 rounded-full border-2 border-amber-300' />}</Link>
           <button onClick={() => setToggle(true)} className='text-white mr-1 ml-2 flex items-center gap-2'>{toggle ? '' : Display}</button>
@@ -311,12 +320,16 @@ const Home = () => {
             </li>
           ))}
          </ul> */}
-          <img src={imageHead} className='w-[36rem] left-4 relative h-[20rem]' />
+       
+          <video autoPlay controls src={imageHead} className='w-[36rem] left-4 relative h-[20rem]' />
         </div>
 
         <div className='header3 flex justify-center'>
           {Loading && <ImSpinner6 className='animate-spin relative left-[5rem] text-4xl top-[3rem] text-blue-700' />}
-          <span className='mt-4 Latest'>Latest Stories</span>
+          <span className='mt-4 flex gap-25 Latest'>
+            <sapn className='border-b-2 h-9 border-blue-700'>Stories</sapn>
+            <Link to='/Videos'><sapn className='border-b-2 h-9 border-blue-600'>Videos</sapn></Link>
+            </span>
         </div>
         {blogs.map((blog) => (
           <div key={blog.id} onClick={UserProfilePage} className='UserPost mb-14 flex justify-center mt-5'>
@@ -324,9 +337,11 @@ const Home = () => {
             <div className='flex gap-3 relative left-10 User_id'>
               <p1 className='profileImage w-[2rem] h-[2rem] rounded-full'><UserAvatar key={blog.id} user={blog.profiles} size={40} /></p1> {/* <img src={blog.profiles?.avatar_url || UserImage} className='profileImage w-[2rem] h-[2rem] rounded-full' /></p1> */}
               <div className='w-[2rem]'>
-                <span className='flex'><Link to={`/profile/${blog.user_id}`}>{blog.profiles?.user_name
-                }</Link></span>
-
+                <span className='flex items-center gap-2'>
+                  <span><Link className='' to={`/profile/${blog.user_id}`}>{blog.profiles?.user_name}</Link></span>
+                  <span>{blog.profiles.Badge ? (<p><MdVerified className="text-blue-600 text-xl md:left-4 max-md:right-13 relative"/></p>) : (<span></span>)}</span>
+              
+              </span>
               </div>
             </div>
             <div></div>
@@ -341,8 +356,55 @@ const Home = () => {
               <h2 className='text-xl'>{blog.Title}</h2>
               <p className='text-[12px]'>{blog.Content}</p>
               <div>
-                <img src={blog.image_url} className='mt-4 w-[40rem] rounded-2xl' alt='NO IMAGE For This Post' />
+                <img src={blog.image_url} onClick={() => handleImageClick(blog.image_url)} className='mt-4 w-[40rem] rounded-2xl' alt='NO IMAGE' />
               </div>
+              {isImage && (
+                      <div
+                        style={{
+                          position: 'fixed',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          zIndex: 1000,
+                        }}
+                      >
+                        <img src={isImage}  style={{ maxWidth: '90%', maxHeight: '100%' }} />
+                        <button
+                          onClick={handleCloseImage}
+                          style={{
+                            position: 'absolute',
+                            top: 28,
+                            right: 30,
+                            border: 'none',
+                            color: '#fff',
+                            fontSize: 30,
+                            cursor: 'pointer',
+                          }}
+                        >
+                         <ImCancelCircle />
+                        </button>
+                        <button
+                          onClick={handleDownloadImage}
+                          style={{
+                            position: 'absolute',
+                            top: 28,
+                            right: 80,
+                            backgroundColor: '',
+                            border: 'none',
+                            color: '#fff',
+                            fontSize: 30,
+                            cursor: 'pointer',
+                          }}
+                        >
+                        <MdOutlineFileDownload />
+                        </button>
+                      </div>
+                    )}
               {/* <Like postId={blog.id} /> */}
             </div>
 

@@ -1,141 +1,165 @@
-*{
+* {
     background: none;
 }
 
+@font-face {
+    font-family: SUPER;
+    src: url(../Fonts/SuperAdorable-MAvyp.ttf);
+}
 
-.form-container {
-    .Google{
-        background-color: wheat;
-        width: 15.5rem;
-        padding: 4px 14px 4px 14px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        place-content: center;
-        gap: 5px;
-        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-    }
+.formMain {
+    font-family: Rosehot;
+}
 
-    .Google:hover{
-        background-color: black;
-        color: white;
-    }
-    .Forgot:hover{
-        background-color: black;
-        color: white;
-    }
-    .Register:hover{
-        background-color: black;
-        color: white;
-    }
+.formMain1 {
+    font-family: Rosehot;
+    background-image: url(../Images/0d7c8903a5fdae153a497f5fb051b951.jpg);
+    background-position: center;
+    background-size: cover;
+}
 
-    .Forgot{
-        margin-bottom: 5px;
-        background-color: wheat;
-        padding: 4px 14px 4px 14px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-    }
+.setName {
+    font-family: SUPER;
 
-    .Register{
-        margin-bottom: 5px;
-        background-color: wheat;
-        padding: 4px 1px 4px 1px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-    }
-
-    p1{
-        color: purple;
+    b {
         font-family: Rosehot;
-    }
-    background-color: rgb(22, 106, 134);
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-    .formWrapper {
-        background-color: white;
-        padding: 14px 60px;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .logo {
-            font-family: Rosehot;
-            color: rgb(142, 1, 155);
-            font-weight: bolder;
-            font-size: 24px;
-        }
-
-        .title {
-            font-family: Rosehot;
-            color: rgb(142, 1, 155);
-            font-size: 12px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-
-            input {
-                padding: 15px;
-                width: 250px;
-                border: none;
-                border-bottom: 1px solid rgb(185, 160, 187);
-
-                &::placeholder {
-                    color: rgb(175, 175, 175);
-                }
-
-            }
-
-            button {
-                background-color: rgb(197, 17, 197);
-                position: absolute;
-                bottom: 4rem;
-                color: white;
-                padding: 10px;
-                font-weight: bold;
-                border: none;
-                cursor: pointer;
-            }
-
-        }
-
-        p {
-            color: rgb(180, 89, 180);
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        .icon {
-            width: 40px;
-        }
-    }
-
-    .icon{
-        position: relative;
-        top: -4rem;
-        align-self: last baseline;
     }
 }
 
-.MainBlog{
+// .form-container {
+//     .Google{
+//         background-color: wheat;
+//         width: 15.5rem;
+//         padding: 4px 14px 4px 14px;
+//         border-radius: 5px;
+//         display: flex;
+//         align-items: center;
+//         place-content: center;
+//         gap: 5px;
+//         transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+//     }
+
+//     .Google:hover{
+//         background-color: black;
+//         color: white;
+//     }
+//     .Forgot:hover{
+//         background-color: black;
+//         color: white;
+//     }
+//     .Register:hover{
+//         background-color: black;
+//         color: white;
+//     }
+
+//     .Forgot{
+//         margin-bottom: 5px;
+//         background-color: wheat;
+//         padding: 4px 14px 4px 14px;
+//         border-radius: 5px;
+//         display: flex;
+//         align-items: center;
+//         gap: 5px;
+//         transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+//     }
+
+//     .Register{
+//         margin-bottom: 5px;
+//         background-color: wheat;
+//         padding: 4px 1px 4px 1px;
+//         border-radius: 5px;
+//         display: flex;
+//         align-items: center;
+//         gap: 5px;
+//         transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+//     }
+
+//     p1{
+//         color: purple;
+//         font-family: Rosehot;
+//     }
+//     background-color: rgb(22, 106, 134);
+//     height: 110vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     font-family: Arial, Helvetica, sans-serif;
+//     overflow-x: hidden;
+//     .formWrapper {
+//         background-color: white;
+//         padding: 14px 60px;
+//         border-radius: 10px;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+
+//         .logo {
+//             font-family: Rosehot;
+//             color: rgb(142, 1, 155);
+//             font-weight: bolder;
+//             font-size: 24px;
+//         }
+
+//         .title {
+//             font-family: Rosehot;
+//             color: rgb(142, 1, 155);
+//             font-size: 12px;
+//         }
+
+//         form {
+//             display: flex;
+//             flex-direction: column;
+//             gap: 15px;
+
+//             input {
+//                 padding: 15px;
+//                 width: 250px;
+//                 border: none;
+//                 border-bottom: 1px solid rgb(185, 160, 187);
+
+//                 &::placeholder {
+//                     color: rgb(175, 175, 175);
+//                 }
+
+//             }
+
+//             button {
+//                 background-color: rgb(197, 17, 197);
+//                 position: absolute;
+//                 bottom: 4rem;
+//                 color: white;
+//                 padding: 10px;
+//                 font-weight: bold;
+//                 border: none;
+//                 cursor: pointer;
+//             }
+
+//         }
+
+//         p {
+//             color: rgb(180, 89, 180);
+//             font-size: 12px;
+//             margin-top: 10px;
+//         }
+
+//         .icon {
+//             width: 40px;
+//         }
+//     }
+
+//     .icon{
+//         position: relative;
+//         top: -4rem;
+//         align-self: last baseline;
+//     }
+// }
+
+.MainBlog {
     background-color: cornsilk;
     height: 100vh;
     width: 100vw;
-    h1{
+
+    h1 {
         background-color: chocolate;
         width: 20%;
         text-align: center;
@@ -143,7 +167,7 @@
         border-bottom-right-radius: 20px;
     }
 
-    input{
+    input {
         text-align: center;
         margin-top: 2rem;
         font-size: 28px;
@@ -156,5 +180,5 @@
         left: 20rem;
         font-family: Arial, Helvetica, sans-serif;
     }
-    
+
 }

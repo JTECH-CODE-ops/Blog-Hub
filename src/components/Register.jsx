@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { FcGoogle } from "react-icons/fc";
-import { ImSpinner6 } from "react-icons/im";
+import { FaGoogle } from "react-icons/fa";
+import { LuLockKeyholeOpen } from "react-icons/lu";
+import { FaArrowRight } from "react-icons/fa6";
+import { TfiLayoutLineSolid } from "react-icons/tfi";
 import supabase from '../supabaseClient';
-import eyeSolidslash from '../img/eye-slash-solid-full.svg'
-import Imagefile from '../img/image-solid-full.svg'
-import eyeSolid from '../img/eye-solid-full.svg'
+import Logo from '../Assets/received_1506971420572100.jpg'
+import eyeSolidslash from '../img/lock-solid-full.svg'
+import { FaRegCircleUser } from "react-icons/fa6";
+import eyeSolid from '../img/lock-open-solid-full.svg'
+import { FaCamera } from "react-icons/fa";
 import './RegLog.scss'
 import { toast } from 'react-toastify'
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
   const [loading, setLoading] = useState(false)
-  const [avatar, setAvatar] = useState(null)
+  const [number, setNumber] = useState('')
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [preview, setPreview] = useState(null)
+  // const [preview, setPreview] = useState(null)
   const navigate = useNavigate()
 
 const handleGoogleLogin = async () => {
@@ -42,7 +46,7 @@ const handleGoogleLogin = async () => {
             {
               id: user.id,
               user_name: user.user_metadata.display_name,
-              avatar_url: user.user_metadata.avatar_url,
+              Number: user.user_metadata.phone,
             },
           ])
           .then((data) => console.log(data))
@@ -55,104 +59,58 @@ const handleGoogleLogin = async () => {
 
   })
 
-  const handleImageChange = (event) => {
-
-    const reader = new FileReader()
-    reader.onload = () => {
-      setPreview(reader.result)
-    }
-      ;
-
-    reader.readAsDataURL(event.target.files[0])
-  }
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
       setLoading(true)
-      const { data, error: uploadError } = await supabase.storage
-        .from('avatars')
-        .upload(`${username}/${email}`, avatar);
-      const avatarUrl = supabase.storage.from('avatars').getPublicUrl(data.path).data.publicUrl;
+      // const { data, error: uploadError } = await supabase.storage
+      //   .from('avatars')
+      //   .upload(`${username}/${email}`, avatar);
+      // const avatarUrl = supabase.storage.from('avatars').getPublicUrl(data.path).data.publicUrl;
       const { user, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
             display_name: username,
-            avatar_url: avatarUrl
+            phone: number,
           },
         },
       });
 
 
       if (error) {
-        console.log(uploadError)
+        // console.log(uploadError)
         console.error(error);
         console.log(email)
-        toast.error("Something Went Wrong")
+        toast.error(error.message)
         setLoading(false)
       } else {
         console.log(user)
-        if (avatar) {
+        // if (avatar) {
 
-          if (error) {
-            console.log('Error uploading!!!!')
-          } else {
+        //   if (error) {
+        //     console.log('Error uploading!!!!')
+        //   } else {
 
-            await supabase.auth.signUp({
-              data: {
-                avatar_url: avatarUrl,
-              },
-            })
+        //     await supabase.auth.signUp({
+        //       data: {
+        //         avatar_url: avatarUrl,
+        //       },
+        //     })
 
-          }
-        }
+        //   }
+        // }
 
         setLoading(false)
 
         toast.success("Successful Operation")
-        navigate("/")
+        navigate("/Setup")
       }
     } catch (error) {
       console.error(error);
     }
   };
-
-  // const uploadAvatar = async (user, avatar) => {
-  //   try {
-  //     const { data, error } = await supabase.storage
-  //       .from('bloggers')
-  //       .upload(`${user.id}/${avatar.name}`, avatar);
-  //     if (error) {
-  //       console.error('Error uploading Avatar:', error)
-  //     } else {
-  //       console.log('Avatar uploaded successfully😀😀')
-  //       const avatarUrl = supabase.storage.from('bloggers').getPublicUrl(data.path).data.publicUrl;
-  //       const { data: updateUser, error: updateError } = await supabase.auth.updateUser({
-  //         options: {
-  //           data: {
-  //             avatar_url: avatarUrl,
-  //           },
-  //         },
-
-  //       });
-  //       if (updateError) {
-  //         console.error(updateError)
-  //       } else {
-
-  //          console.log(updateUser)
-  //       }
-
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // };
-
-  const handleAvatarChange = (event) => {
-    setAvatar(event.target.files[0]);
-  }
 
   let icon = document.getElementById('icon')
   let passInput = document.getElementById('password')
@@ -170,34 +128,24 @@ const handleGoogleLogin = async () => {
   }
 
   return (
-    <div className='form-container'>
-      <div className="formWrapper">
-        <span className="logo">BLOGHUB</span>
-        <span className="title">Register</span>
-        <form onSubmit={handleSignUp} className='Details'>
-          <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-          <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-          <input required type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-          <img src={eyeSolidslash} id="icon" onClick={Eyeicon} className='icon'></img>
-          <input type='file' id='file1' onChange={(e) => {
-            handleImageChange(e);
-            handleAvatarChange(e);
-          }} style={{ display: 'none' }} />
-          <label htmlFor='file1' className='' >
-            <img src={Imagefile} className='icon' />
-            {preview && (
-              <img className='relative left-[14rem] top-[-6rem] w-[2.1rem] h-[2rem] rounded-full ' src={preview} alt='Selected Image' />
-            )}
-
-          </label>
-          <button type="submit">Sign Up</button>
-        </form>
-        {loading && <span className='relative bottom-25'><ImSpinner6 className='text-blue-700 animate-spin mr-2 relative top-10 text-3xl' /></span>}
-        <p className=' relative top-[-4rem]'>Do you have an account? <Link to='/login'>Login</Link> </p>
-        <p className=' relative top-[-4rem]'>OR</p>
-        <p onClick={handleGoogleLogin} className='Google relative top-[-4rem]'>Continue With <FcGoogle/></p>
+    <div className='formMain'>
+      <div className='grid justify-center mt-10'><div className='text-2xl font-extrabold'>Sign Up</div></div>
+    {/* Form Container */}
+   
+     <form onSubmit={handleSignUp}>
+      <div className='grid gap-9 mt-8 justify-center'>
+        <div><input required value={username} onChange={(e) => setUsername(e.target.value)} type='text' placeholder='Full name'  className='relative left-3 outline-0 px-2 text-[18px] border-gray-400 h-10 rounded-[5px] w-80  border-2'/></div>
+        <div><input required value={email} onChange={(e) => setEmail(e.target.value)} type='text' placeholder='Email' className='relative left-3 outline-0 px-2 text-[18px] border-gray-400 h-10 rounded-[5px] w-80  border-2'/></div>
+        <div className='flex items-center'><input required id='password' value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' className='relative left-3 outline-0 px-2 text-[18px] border-gray-400 h-10 rounded-[5px] w-80  border-2'/><img src={eyeSolidslash} id="icon" onClick={Eyeicon} className='w-6 relative right-7'></img></div>
+        <div><input required value={number} onChange={(e) => setNumber(e.target.value)} type='number' placeholder='Phone number' className='relative left-3 outline-0 px-2 text-[18px] border-gray-400 h-10 rounded-[5px] w-80  border-2'/></div>
+        <div className='font-extrabold'><input type='checkbox' className='font-extrabold'/> Accept Terms & Conditions</div>
+        <div style={{backgroundColor: 'black'}} className='h-10 grid justify-center rounded-[8px]'>{loading ? (<button className='font-black animate-pulse text-white'>Signing in. . . . . . . . . . . . . . .</button>) : <button className='font-black text-white flex items-center gap-3'>Join us<FaArrowRight /></button>}</div>
+       <div className='flex justify-center'><TfiLayoutLineSolid className='text-2xl w-10'/>Or<TfiLayoutLineSolid className='text-2xl w-10'/></div>
+       <div>Already have an account? <Link to='/Login' className='text-blue-600 font-bold'>Login</Link></div>
+       <div style={{boxShadow: '1px 1px 1px 1px gray'}} className='h-10 relative -top-2 grid justify-center rounded-[8px]'><button onClick={handleGoogleLogin} className='font-black text-black flex items-center gap-3'><FaGoogle className='text-blue-600'/>Sign up with Google</button></div>
       </div>
-
+     </form>
+    
     </div>
   );
 }

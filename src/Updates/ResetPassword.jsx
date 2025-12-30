@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import supabase from '../supabaseClient'
-import { useParams } from 'react-router-dom'
-import eyeSolidslash from '../img/eye-slash-solid-full.svg'
-import eyeSolid from '../img/eye-solid-full.svg'
+import eyeSolidslash from '../img/lock-open-solid-full.svg'
+import eyeSolid from '../img/lock-solid-full.svg'
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-    const { access_token } = useParams();
+    // const [token, setToken] = useState('')
+
+    useEffect(() => {
+        const handleRecovery = async () => {
+         const { data } = await supabase.auth.getSession()
+         if(!data.session) {
+            console.error(error)
+            setError(error.message)
+         }
+         console.log('session', data)
+        }
+       handleRecovery()
+        
+    }, [error])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -19,14 +31,18 @@ const ResetPassword = () => {
             return;
         }
         try{
-            const { error } = 
-            await supabase.auth.updateUser({ password }, access_token);
+            const { error } = await supabase.auth.updateUser({
+             password: password
+            });
             if (error) {
+                console.error(error.message)
                 setError(error.message);
             }else {
-                setSuccess(true)
+                  setSuccess(true) 
+                  await supabase.auth.signOut()
             }
         }catch (error) {
+            console.error(error.message)
             setError(error.message)
         }
     };

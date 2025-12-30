@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import supabase from '../supabaseClient';
 import { LiaComments } from "react-icons/lia";
 import { FaArrowLeft } from "react-icons/fa6";
-import { MdVerified } from "react-icons/md";
-import './Design.scss'
+import '../Router/Design.scss'
 import { useParams, Link } from 'react-router-dom';
 import { BsFillSendFill } from "react-icons/bs";
 import { toast } from 'react-toastify';
+import { MdVerified } from "react-icons/md";
 import useOnlineReaders from '../Updates/OnlineReaders';
 
 
-const Comment = () => {
+const VideoComment = () => {
   const { postId } = useParams();
   
   const [loading, setLoading] = useState(false)
@@ -203,14 +203,13 @@ const Comment = () => {
   return (
     <div>
       <div className=''>
-        <Link to='/'><p className='mb-7 relative text-2xl text-black'><FaArrowLeft /></p></Link>
+        <Link to='/Videos'><p className='mb-7 relative text-2xl text-black'><FaArrowLeft /></p></Link>
       </div>
       {post && (
         <div className='PostContent'>
           <div className='PostContent1'>
-            <h2>{post.Title}</h2>
-            <p>{post.Content}</p>
-            <img src={post.image_url} />
+            <h2>{post.video_title}</h2>
+            <video controls autoPlay src={post.video_url} />
           </div>
           {readers.length} Person is Reading This
         </div>
@@ -236,7 +235,7 @@ const Comment = () => {
             <div className='DisplayComments' key={comment.id}>
               <div className='userCred'>
                 <img src={comment.profiles?.avatar_url} />
-                <Link to={`/profile/${comment.user_id}`}><p className='flex gap-16 items-center'>{comment.profiles?.user_name}{comment.profiles.Badge ? (<p><MdVerified className="text-blue-600 text-xl md:left-4 max-md:right-13 relative"/></p>) : (<span></span>)}</p></Link>
+                <Link to={`/profile/${comment.user_id}`}><p className='flex items-center gap-17'>{comment.profiles?.user_name}{comment.profiles.Badge ? (<p><MdVerified className="text-blue-600 text-xl md:left-4 max-md:right-13 relative"/></p>) : (<span></span>)}</p></Link>
               </div>
               <div className='comment'>
                 <p className=''>{comment.comment_text}</p>
@@ -264,4 +263,4 @@ const Comment = () => {
   )
 }
 
-export default Comment
+export default VideoComment

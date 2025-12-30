@@ -1,55 +1,101 @@
 import './Faq.scss'
-import Img from '../Images/4de26bb962a47b9d5c2e76d30544ddc1.jpg'
 import { Link } from 'react-router-dom'
-import { FaRegArrowAltCircleLeft } from "react-icons/fa"
-import Telegram from '../Assets/20359662fcd835fa8637bdee18ad6697.jpg'
-import Whatsapp from '../Assets/93b265c795140247db600ac92e58746a (1).jpg'
-import Facebook from '../Assets/5bb0f73a7b3e0f976acad614a42e5040.jpg'
-import Instagram from '../Assets/Reactimg.jpg'
+import { FaArrowLeft } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa6";
+import { RiTelegram2Line } from "react-icons/ri";
+import { FaFacebookF } from "react-icons/fa";
+import { useState } from 'react'
+import { IoIosArrowDropdown } from "react-icons/io";
+import { IoIosArrowDropup } from "react-icons/io";
+
 
 const BlogList = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen1, setIsOpen1] = useState(false)
+    const [isOpen2, setIsOpen2] = useState(false)
+    const [isOpen3, setIsOpen3] = useState(false)
+    const [isOpen4, setIsOpen4] = useState(false)
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen)
+    }
+    const toggleDropdown1 = () => {
+        setIsOpen1(!isOpen1)
+    }
+    const toggleDropdown2 = () => {
+        setIsOpen2(!isOpen2)
+    }
+    const toggleDropdown3 = () => {
+        setIsOpen3(!isOpen3)
+    }
+    const toggleDropdown4 = () => {
+        setIsOpen4(!isOpen4)
+    }
     return (
-        <div className='Faq'>
-            <div className="flex justify-center">
-                <div className=''>
-                    <Link to='/'><p className='mb-7 relative -left-30 text-2xl text-white'><FaRegArrowAltCircleLeft /></p></Link>
+        <div>
+            {/* Top header */}
+            <Link to='/'><FaArrowLeft/></Link>
+            <div className='grid justify-center'>
+                <div className='px-27 text-[12px]'>Faq</div>
+                <div className='text-xl font-bold'>Frequently asked questions</div>
+                <div className='text-[10px] px-5'>Thousand questions, we will give you the answers</div>
+            </div>
+            {/* Body */}
+            <div className='grid justify-center FaqMain mt-5'>
+                <div className='grid h-[70vh]'>
+                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>What is Bloghub and how can it help me? <div className='cursor-pointer' onClick={toggleDropdown}>{isOpen ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                        <div className={`py-4 ${isOpen ? 'block' : 'hidden'}`}>
+                    <ul className='font-light'>
+                        <li>Blog-Hub is a online social media article <br/>Posting platform to connect people Globally it is still in it t Phase</li>
+                        </ul>
                 </div>
-                <h1 className="Top font-bold text-white text-2xl">Welcome To <p className="text-amber-300 Bloghub font-semibold font-serif">Bloghub</p></h1>
-            </div>
-            <div className='flex justify-center mt-3'>
-                <img src={Img} className='w-[25rem] rounded-[8px]' />
-            </div>
-            <div className='flex justify-center mt-5'>
-                <h1 className='text-3xl text-amber-400'>Have Any QuestionTo ASk ? </h1>
-            </div>
-            <div className='mt-4 gap Questions'>
-                <div><p1 className='text-white text-2xl capitalize'>How to Create An Account ? just click <Link className='text-amber-300' to='/register'>Signup</Link></p1><br /><br /></div>
-                <div><p1 className='text-white text-2xl capitalize'>How to Login ? you can login in with google or <Link className='text-amber-300' to='/login'>Login</Link></p1><br /><br /></div>
-                <div><p1 className='text-white text-2xl capitalize'>You can also search for other users  <Link to='/Online-Users'>Search</Link></p1></div>
-            </div>
-            <div className='mb-5 flex justify-center'>
-                <Link to='/Contact'><p className='text-white Send'>Send Us A Message</p></Link>
-            </div>
-
-
-            <div className='Faq1 mt-5 text-white'>
-                <div className='flex justify-center'>
-                    <p className='text-blue-700'>Contact us at Our Socia Media Platform</p>
+                    </div>
+                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>What Support do we offer with your platform <div className='cursor-pointer' onClick={toggleDropdown1}>{isOpen1 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                        <div className={`py-4 ${isOpen1 ? 'block' : 'hidden'}`}>
+                    <ul className='font-light'>
+                        <li>Blog-Hub offers visibility, <br/>Blog-Hub makes you filled welcomed</li>
+                        </ul>
                 </div>
-                <div className='mt-15 flex gap-[3rem] justify-center'>
-                    <a href='https://t.me/CryptoAirdropsToi'><img src={Telegram} className='w-12 rounded-full' /></a>
-                    <a href='https://chat.whatsapp.com/C9HH4eOiUpmBtbWKCwcuik?mode=wwt'><img src={Whatsapp} className='w-12 rounded-full' /></a>
-                    <a href='https://www.facebook.com/61580530344079/posts/pfbid0ewPQf1uS9iA5cwPhmTXeyvCscyiBhzsYbLRoq2PUMrS93VhSvRBFNHyA448cWqqXl/?app=fbl'><img src={Facebook} className='w-12 rounded-full' /></a>
-                    <a href='https://www.instagram.com/jtechoding?igsh=MTc4ZHpweGhmbDk5ZA=='><img src={Instagram} className='w-12 rounded-full' /></a>
+                    </div>
+                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>How Do i start using Blog-Hub <div className='cursor-pointer' onClick={toggleDropdown2}>{isOpen2 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                        <div className={`py-4 ${isOpen2 ? 'block' : 'hidden'}`}>
+                    <ul className='font-light'>
+                        <li>Blog-Hub is a online social media article <br/>Posting platform to connect people Globally it is still in it testing Phase</li>
+                        </ul>
                 </div>
-                <div className='mt-10 flex justify-center font-semibold text-amber-400'>
-                    <h1 className='text-3xl'>Stay Updated With Us</h1>
+                    </div>
+                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>Can i Connect with people in Blog-Hub <div className='cursor-pointer' onClick={toggleDropdown3}>{isOpen3 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                        <div className={`py-4 ${isOpen3 ? 'block' : 'hidden'}`}>
+                    <ul className='font-light'>
+                        <li>Yes you can, and its very easy to do <br/>ALways make sure to post and be initiative</li>
+                        </ul>
                 </div>
-                {/* <div className='flex justify-center'>
-                <form>
-                 <input type='text' className=' text-white text-2xl mt-6 w-[22rem] p-2 rounded-[12px] border-2 outline-0 border-green-500' placeholder='Your Email Address'/>
-                </form>
-            </div> */}
+                    </div>
+                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>Can i post Any Content on Blog Hub <div className='cursor-pointer' onClick={toggleDropdown4}>{isOpen4 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                        <div className={`py-4 ${isOpen4 ? 'block' : 'hidden'}`}>
+                    <ul className='font-light'>
+                        <li>Yes you can if your content is text,video or photo <br/>Blog-Hub will alow it, and always remember to post Good Content</li>
+                        </ul>
+                </div>
+                    </div>
+                    <div className='text-[14px] flex font-bold rounded-[12px] relative top-10 mb-5 dropDown1 pl-4 pr-4'>
+                        <div>
+                        <div className='py-2'>Still have a question?</div>
+                        <div className='text-[10px] font-light'>Can't find the answer to your question?<br/> Send us an email and we will get back<br/> to you as soon as possible.</div>
+                    </div>
+                   <Link to='/Contact'><div className='ml-8 mt-10'><button className='conFaq p-2 rounded-full'>Contact Us</button></div></Link> 
+                    </div>
+                    {/* Social media Link */}
+                    <div className='mt-15 flex justify-center'>
+                        <div className='conFaq1 p-2 rounded-[12px] flex gap-4'>
+                        <a href='https://chat.whatsapp.com/C9HH4eOiUpmBtbWKCwcuik?mode=wwt'><FaWhatsapp className='text-xl'/></a>
+                        <a href='https://www.facebook.com/61580530344079/posts/pfbid0ewPQf1uS9iA5cwPhmTXeyvCscyiBhzsYbLRoq2PUMrS93VhSvRBFNHyA448cWqqXl/?app=fbl'><FaFacebookF className='text-xl'/></a>
+                        <a href='https://www.instagram.com/jtechoding?igsh=MTc4ZHpweGhmbDk5ZA=='><FaInstagram className='text-xl'/></a>
+                        <a href='https://t.me/CryptoAirdropsToi'><RiTelegram2Line className='text-xl'/></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

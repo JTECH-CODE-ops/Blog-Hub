@@ -3,7 +3,6 @@ import './Design.scss'
 import { IoMdCloseCircle } from "react-icons/io";
 
 const Modal = ({ isOpen, onClose, children }) => {
-
     useEffect(() => {
         const handleEsc = (e) => e.key === 'Escape' && onClose();
         if (isOpen) window.addEventListener('keydown', handleEsc);
@@ -15,7 +14,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className='modal-overlay' onClick={onClose}>
      <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-        <button className='modal-close' onClick={onClose}><IoMdCloseCircle /></button>
+        <button className='modal-close gap-4 flex' onClick={onClose}><IoMdCloseCircle /></button>
         {children}
      </div>
     </div>
