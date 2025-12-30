@@ -83,7 +83,7 @@ const Login = () => {
    <div style={{backgroundColor: 'black'}} className='h-10 grid justify-center rounded-[8px]'>{loading ? (<button className='font-black animate-pulse text-white'>Logging in. . . . . . . . . .</button>) : <button className='font-black text-white flex items-center gap-3'>Login<FaArrowRight /></button>}</div>
           <div className='flex justify-center'><TfiLayoutLineSolid className='text-2xl w-10'/>Or<TfiLayoutLineSolid className='text-2xl w-10'/></div>
           <div>Don't have an Account? <Link to='/register' className='font-bold text-blue-600'>Register</Link></div>
-          <div>Forgot Password? <Link to='/register' className='font-bold text-blue-600'>Click here</Link></div>
+          <div>Forgot Password? <Link to='/Forgot' className='font-bold text-blue-600'>Click here</Link></div>
           <div style={{boxShadow: '1px 1px 1px 1px gray'}} className='h-10 relative -top-2 grid justify-center rounded-[8px]'><button onClick={handleGoogleLogin} className='font-black text-black flex items-center gap-3'><FaGoogle className='text-blue-600'/>Login with Google</button></div>
     </div>
    </form>

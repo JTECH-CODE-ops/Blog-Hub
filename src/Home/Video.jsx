@@ -6,7 +6,7 @@ import supabase from '../supabaseClient';
 import { toast } from 'react-toastify';
 import VideoLike from './VideoLikes';
 import { Link } from 'react-router-dom';
-
+import { MdVerified } from "react-icons/md";
 
 
 
@@ -83,7 +83,7 @@ const Video = () => {
               </div>
               {/* video */}
               <div className='flex justify-center'><video controls src={blog.video_url} className='h-[80vh] w-[70vw]' /></div>
-              <div className='text-white relative px-2 font-extrabold text-xl top-5 mb-4'><div>{blog.profiles?.user_name}</div></div>
+              <div className='text-white relative px-2 font-extrabold text-xl top-5 mb-4 items-center flex gap-2'><div>{blog.profiles?.user_name}</div><div>{blog.profiles.Badge ? (<p><MdVerified className="text-blue-600 text-xl"/></p>) : (<span></span>)}</div></div>
               <div className='text-white relative top-5'><div>##{blog.video_title}</div></div>
             </div>
           </div>
