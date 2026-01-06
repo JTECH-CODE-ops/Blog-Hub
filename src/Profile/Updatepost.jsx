@@ -223,7 +223,7 @@ const Updatepost = () => {
         {/* Top header */}
         <div className='grid place-content-center'> 
         <div className='flex gap-10 items-center'>
-          <div className='font-bold'>Create Post</div>
+          <div className='font-bold'>Update Post</div>
         </div>
         </div>
         {/* Content */}

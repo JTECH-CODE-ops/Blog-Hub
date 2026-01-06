@@ -24,12 +24,10 @@ import ShowPhoto from './Updates/ShowPhoto'
 import Searchusers from './Updates/Searchusers'
 import Setupprofile from './components/Setupprofile'
 import ForgotPassword from './Updates/ForgotPassword'
+import Invite from './Updates/Invite'
 
 
 const App = () => {
-
-
-
   return (
     <div>
       <BrowserRouter>
@@ -42,6 +40,7 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="Setup" element={<Setupprofile />} />
             <Route path="Faq" element={<Faq />} />
+            <Route path="Invite" element={<Invite />} />
             <Route path="createBlog" element={<CreateBlog />} />
             <Route path="createVideo" element={<CreateVideo />} />
             <Route path="profile" element={<Profile />} />

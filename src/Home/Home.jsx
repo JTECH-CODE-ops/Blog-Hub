@@ -1,13 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { TiThMenu } from "react-icons/ti";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime'
 import './Home.scss'
+import { MdOndemandVideo } from "react-icons/md";
+import { ImSpinner3 } from "react-icons/im";
+import { FaRegComment } from "react-icons/fa";
+import User from '../Images/0d7c8903a5fdae153a497f5fb051b951.jpg'
 import { HiOutlineStatusOnline } from "react-icons/hi";
+import { HiMiniUsers } from "react-icons/hi2";
+import { IoMdHome } from "react-icons/io";
 import { MdVerified } from "react-icons/md";
-import imageHead from '../Images/134111-758552424_tiny.mp4'
+import ImageHead from '../Images/134111-758552424_tiny.mp4'
 import { IoNotifications } from "react-icons/io5";
+import { FaComment, FaRegShareFromSquare } from "react-icons/fa6";
 import { LuLogOut } from "react-icons/lu";
 import { IoMenu } from "react-icons/io5";
-import { FaRegCommentAlt } from "react-icons/fa";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { LuLogIn } from "react-icons/lu";
 import { GiCancel } from "react-icons/gi";
 import { FaQuestionCircle } from "react-icons/fa";
 import { RiCloseCircleFill } from "react-icons/ri";
@@ -18,23 +27,30 @@ import { FaSquarePlus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import supabase from '../supabaseClient';
 import { ImSpinner6 } from "react-icons/im";
+import { MdCircleNotifications } from "react-icons/md";
 import UserAvatar from '../Router/UserAvatar';
+import { IoSearchCircle } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
-import { useNotifications } from '../Router/NotifAlert';
+// import { useNotifications } from '../Router/NotifAlert';
 import UserProfilePage from '../Display/DispalyProfile';
 import { toast } from 'react-toastify';
 import Like from '../Router/Like';
-import useAuthorPresence from '../Updates/AuthorPresence';
+// import useAuthorPresence from '../Updates/AuthorPresence';
 import Logo from '../Images/BlogHubLogo.jpg'
+import ReadMoreToggle from '../Updates/ReadMoreToggle';
+import Share from '../Updates/Share';
+import ManualShare from '../Updates/ManualShare';
+
+dayjs.extend(relativeTime)
 
 const Home = () => {
-  const { onlineUsers } = useAuthorPresence()
-  const { newAlert, setNewAlert } = useNotifications()
+  // const { onlineUsers } = useAuthorPresence()
+  // const { newAlert, setNewAlert } = useNotifications()
   const [blogs, setBlogs] = useState([]);
   const [Loading, setLoading] = useState(false)
   const [userProfile, setUserProfile] = useState({});
   const [user, setUser] = useState(null)
-  const [toggle, setToggle] = useState(false)
+  // const [toggle, setToggle] = useState(false)
    const [isImage, setIsImage] =  useState(null)
   //  const [subscriptionStatus, setSubscriptionStatus] = useState(null)
   const [notifications, setNotifications] = useState([])
@@ -140,37 +156,7 @@ const Home = () => {
   }
 
 
-
-  const DisplayNone = (
-    <h1><GiCancel className='text-2xl' />
-      <div className='font-bold bg-black w-[8rem] Menu'>
-        <Link to='/profile'><p className='text-white'><FaRegUser className='relative top-[18px]' />Profile</p></Link>
-        <Link to='/Faq'><p className='text-white'><FaQuestionCircle className='relative top-[18px]' />Faq</p></Link>
-        <Link to='/Notify'><p className='countNotify text-white flex'><IoNotifications className='ml-[-20px] relative top-[0.1px] text-[1.5rem]' /><p1 className='noCount text-white relative text-[14px] top-0.5 left-22.5'>{notifications.length}</p1><p1 className='relative -left-5'>Notification</p1></p></Link>
-        <p className='text-white' onClick={Logout}><LuLogOut className='relative top-[19px]' />Logout</p>
-        <Link to='/Online-Users'><p className='text-white'><HiOutlineStatusOnline className='relative top-[18px]' />see Whose Online ?</p></Link>
-        <Link to='/Searchusers'><p className='text-white'><FaSearch className='relative top-[18px]' />Search</p></Link>
-      </div>
-    </h1>
-  )
-
-  const Display = (
-    <IoMenu className='text-2xl' />
-  )
-
   useEffect(() => {
-    // const fetchCount = async () => {
-    //   const { data: countData, error } = await supabase
-    //     .from('blog_post_with_comment_count')
-    //     .select('*');
-
-    //   if (error) {
-    //     console.error(error)
-    //   } else {
-    //     setBlogs(countData)
-    //     console.log(countData)
-    //   }
-    // };
 
     const fetchUser = async () => {
       try {
@@ -199,7 +185,7 @@ const Home = () => {
           
 
         if (error) {
-          toast.error('Check Your Network Or Login Again')
+          // toast.error('Check Your Network Or Login Again')
           setLoading(false)
           console.error(error);
         } else {
@@ -263,102 +249,57 @@ const Home = () => {
       supabase.removeChannel(channel)
 
     }
-
-
   }, [navigate]);
 
-  // const deletePost = async (postId) => {
-  //   if(!postId) {
-  //     toast.error('POSTID Required');
-  //     return;
-  //   }
+  if(!user) return <div className='grid justify-center mt-[45vh]'>
+    <div><ImSpinner3 className='text-5xl relative ml-10 mb-5 animate-spin text-blue-600'/></div>
+    <Link to='/login'><button style={{backgroundColor: 'blue', fontFamily: 'Rosehot'}} className='font-bold flex items-center gap-2 text-white p-2 rounded-3xl'>Login Again<LuLogIn className='text-xl'/></button></Link>
+    </div>
 
-  //   try{
-  //     const {data, error} = await supabase
-  //   .from("blog_post")
-  //   .delete()
-  //   .eq("id", postId);
-
-  //   if(error) {
-  //     console.error(error)
-  //   }else{
-  //     toast.success("Post Deleted")
-  //     console.log('Your Data', data)
-  //     setBlogs((prevBlog) => prevBlog.filter((post) => post.id !== postId))
-  //   }
-  //   }catch (error) {
-  //     console.error('ANOTHER ERROR'), error
-  //     toast.error('TRY AGAIN')
-  //   }
-
-  // }
   return (
-    <div className='MainHeader'>
-      {/* header */}
-      <div className='header grid grid-cols-2'>
-        <div>
-          <h1><img className='w-15 h-10' src={Logo} /></h1>
-        </div>
-        <div className='flex justify-end max-md:w-50'>
-          <Link to='/createBlog'><button className='text-white mr-3 flex items-center gap-2'>Post<FaSquarePlus className='text-2xl' /></button></Link>
-          <Link to='/profile'>{userProfile && <img src={userProfile.user_metadata?.avatar_url} className='w-10 h-10 rounded-full border-2 border-amber-300' />}</Link>
-          <button onClick={() => setToggle(true)} className='text-white mr-1 ml-2 flex items-center gap-2'>{toggle ? '' : Display}</button>
-          <button onClick={() => setToggle(false)} className='text-white mr-1 ml-2 flex items-center gap-2'>{toggle ? DisplayNone : ''}</button>
-        </div>
+    <div className='HomeMain'>
+      {/* Top Header */}
+      <div>
+         <div style={{fontFamily: 'Bulb'}} className='relative top-4 px-2'>
+      <div className='text-xl text-blue-900'>bloghub</div>
       </div>
-      {/* image header */}
-      <div className='header2 grid grid-cols-1'>
-        {newAlert && (<div className='AlertNotify text-green-500'><p1>{newAlert}</p1>
-          <button onClick={() => setNewAlert(null)}><RiCloseCircleFill /></button>
-        </div>)}
-        <h3>Users Online: {onlineUsers.length}</h3>
-        <div className='flex justify-center'>
-          {/* <ul className='relative top-[10rem] Online'>
-          {onlineUsers.map((u) => (
-            <li key={u.user_id} className=''>
-              {u.user_id === users.id ? "You" : u.user_name}
-            </li>
-          ))}
-         </ul> */}
-       
-          <video autoPlay controls src={imageHead} className='w-[36rem] left-4 relative h-[20rem]' />
-        </div>
-
-        <div className='header3 flex justify-center'>
-          {Loading && <ImSpinner6 className='animate-spin relative left-[5rem] text-4xl top-[3rem] text-blue-700' />}
-          <span className='mt-4 flex gap-25 Latest'>
-            <sapn className='border-b-2 h-9 border-blue-700'>Stories</sapn>
-            <Link to='/Videos'><sapn className='border-b-2 h-9 border-blue-600'>Videos</sapn></Link>
-            </span>
-        </div>
+      <div className='flex justify-end relative -top-4'>
+      {/* Other Top */}
+      <div className='flex gap-5 items-center'>
+    
+      <Link to='/createBlog'><div><AiFillPlusCircle className='text-3xl text-blue-600'/></div></Link>
+       <Link to='/profile'><div><img src={userProfile.user_metadata?.avatar_url} className='w-10 rounded-full h-10 border-blue-700 border-3'/></div></Link>
+      </div>
+      </div> 
+      <div className='flex gap-20 justify-center'>
+        <Link to='/Videos'><div><div><MdOndemandVideo  className='text-3xl text-blue-600'/><div></div></div></div></Link>
+       <Link to='/Notify'><div className='relative -top-2'><div className='flex items-center'><MdCircleNotifications className='text-3xl text-blue-600'/><div style={{backgroundColor: 'red', fontFamily: 'Rosehot'}} className='w-6 h-6 justify-center mb-5 text-white  font-bold flex rounded-full'>{notifications.length}</div></div></div></Link>
+        <Link to='/Searchusers'><div><div><IoSearchCircle className='text-3xl text-blue-700'/></div></div></Link>
+      </div>
+      </div>
+      {/* Middle Header */}
+      <div className='h-[77vh] overflow-y-scroll'>
         {blogs.map((blog) => (
-          <div key={blog.id} onClick={UserProfilePage} className='UserPost mb-14 flex justify-center mt-5'>
-            {/* user profile */}
-            <div className='flex gap-3 relative left-10 User_id'>
-              <p1 className='profileImage w-[2rem] h-[2rem] rounded-full'><UserAvatar key={blog.id} user={blog.profiles} size={40} /></p1> {/* <img src={blog.profiles?.avatar_url || UserImage} className='profileImage w-[2rem] h-[2rem] rounded-full' /></p1> */}
-              <div className='w-[2rem]'>
-                <span className='flex items-center gap-2'>
-                  <span><Link className='' to={`/profile/${blog.user_id}`}>{blog.profiles?.user_name}</Link></span>
-                  <span>{blog.profiles.Badge ? (<p><MdVerified className="text-blue-600 text-xl md:left-4 max-md:right-13 relative"/></p>) : (<span></span>)}</span>
-              
-              </span>
-              </div>
+      <div onClick={UserProfilePage} key={blog.id} className='h-[85vh] grid justify-center'>
+        {/* PostBackground */}
+        <div style={{backgroundColor: 'whitesmoke'}} className='w-[96vw] md:w-[50vw] h-[78vh] rounded-[12px]'>
+          <div className='overflow-y-scroll h-[70vh] mb-3'>
+          {/* User-Id */}
+          <div className='flex gap-3 px-3 py-3'>
+            {/* <div><img src={User} className='w-10 rounded-full h-10'/> </div> */}
+            <div><UserAvatar key={blog.id} user={blog.profiles} size={40} /></div>
+            <div>
+              <div style={{fontFamily: 'Rosehot'}} className='font-extrabold '><Link className='' to={`/profile/${blog.user_id}`}><div className='flex items-center gap-2'>{blog.profiles?.user_name}{blog.profiles.Badge ? (<div><MdVerified className="text-blue-600 text-xl"/></div>) : (<div></div>)}</div></Link></div>
+              <div>{dayjs(blog.created_at).fromNow()}</div>
             </div>
-            <div></div>
-            {/* post content */}
-            <div className='UserContent relative mr-5 top-12'>
-              <div className=''>
-                <a
-                  href={blog.Link}
-                  className='text-blue-700 underline'>{blog.Link} </a>
-              </div>
-              <div><p className=''>Posted {new Date(blog.created_at).toDateString() || ''}</p></div>
-              <h2 className='text-xl'>{blog.Title}</h2>
-              <p className='text-[12px]'>{blog.Content}</p>
-              <div>
-                <img src={blog.image_url} onClick={() => handleImageClick(blog.image_url)} className='mt-4 w-[40rem] rounded-2xl' alt='NO IMAGE' />
-              </div>
-              {isImage && (
+            </div>
+            {/* Post Content */}
+            <div>
+              {/* Post Pic */}
+            <div className='grid justify-center'>
+              <div><img src={blog.image_url} onClick={() => handleImageClick(blog.image_url)} className='w-[90vw] h-[50vh]'/></div>
+            </div>
+            {isImage && (
                       <div
                         style={{
                           position: 'fixed',
@@ -405,36 +346,37 @@ const Home = () => {
                         </button>
                       </div>
                     )}
-              {/* <Like postId={blog.id} /> */}
+            {/* Post Text */}
+            <div className='mt-2 px-2'>
+            <div style={{fontFamily: 'arial'}} className='text-xl font-semibold'>{blog.Title}</div>
+            <div className='text-xl'>   <a
+                  href={blog.Link}
+                  className='text-blue-700 underline'>{blog.Link} </a></div>
+            <button style={{fontFamily: 'Rosehot'}} className='mt-2 font-bold'><ReadMoreToggle text={blog.Content} /></button>
             </div>
-
-            <Link to={`/post/${blog.id}/comments`}>
-              <div className='Comment  relative right-[25rem] top-[24rem]'>
-                <FaRegCommentAlt className='relative  -top-10rem text-[24px]]' />
-                <p className='commentCount ml-2 mt-[-5px]'>{blog?.comment_count || 0}</p>
-              </div>
-              <Link to='/'>
-                <div className='Like'>
-                  <Like postId={blog.id} />
-                </div>
-              </Link>
-            </Link>
-          </div>
+            </div>
+        </div>
+        {/* Comment Like Share Link */}
+        <div className='flex justify-center gap-11'>
+          <div className='py-1' style={{fontFamily: 'Rosehot'}}><Like postId={blog.id} /></div>
+           <Link to={`/post/${blog.id}/comments`}><div style={{fontFamily: 'Rosehot'}} className='flex items-center gap-2'><FaRegComment />{blog?.comment_count || 0}</div></Link>
+          <div style={{fontFamily: 'Rosehot'}}><Share post={blog} /></div>
+          <div style={{fontFamily: 'Rosehot'}}><ManualShare share={blog} /></div>
+        </div>
+        </div>
+        </div>
         ))}
+        </div>
+        {/* Bottom Header */}
+      <div className='grid gap-10 grid-cols-5'>
+       <Link to='/'><div><IoMdHome className='text-2xl text-blue-600'/></div></Link>
+        <Link to='/faq'><div><FaQuestionCircle className='text-2xl text-blue-600'/></div></Link>
+        <Link to='/Invite'><div><FaRegShareFromSquare className='text-2xl text-blue-600'/></div></Link>
+        <Link to='/Online-Users'><div><HiMiniUsers className='text-2xl text-blue-600'/></div></Link>
+        <div><LuLogOut onClick={Logout} className='text-2xl text-blue-600'/></div>
       </div>
     </div>
   )
-
-
-  // return (
-  //   <div>
-  //     <div className="Apps">
-  //     <div className="h-[50vh] bg-red-600">APPS1</div>
-  //     <div className="menuApp2 h-[50vh] bg-blue-700">APPS2</div>
-  //     <div className="menuApp3">APPS3</div>
-  //     </div>
-  //   </div>
-  // )
 }
 
 export default Home

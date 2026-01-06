@@ -74,7 +74,7 @@ const Login = () => {
 
   return (
   <div className='formMain'>
-   <div className='grid justify-center mt-10'><div className='text-2xl font-extrabold'>Login</div></div>
+   <div className='grid justify-center mt-10'><div style={{fontFamily: 'Bulb'}} className='text-2xl text-blue-900 font-extrabold'>Login</div></div>
    {/* Form Container */}
    <form onSubmit={handleSignUp}>
     <div className='grid gap-8  mt-8 justify-center'>

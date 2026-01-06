@@ -105,7 +105,7 @@ const NotifyUser = () => {
     <div className='Notifications'>
       <div className='grid'>
         <h1 className='Notify'><Link to='/'><p className='relative top-5 text-2xl text-black'><FaArrowLeft /></p></Link>Notifications</h1>
-        <p>You have ({notifications.length}) notifications </p>
+        <p className='font-bold'>You have ({notifications.length}) notifications </p>
         <div className='flex justify-end gap-5'>
         <p className='relative bottom-6 justify-end text-red-600 text-2xl' onClick={() => deleteNotifications()}>{loading ? <RiDeleteBin6Line/> : <RiDeleteBin6Line/>}</p>
         <p className='relative bottom-6 justify-end text-blue-600 text-2xl'><IoNotifications/></p>

@@ -129,7 +129,7 @@ const handleGoogleLogin = async () => {
 
   return (
     <div className='formMain'>
-      <div className='grid justify-center mt-10'><div className='text-2xl font-extrabold'>Sign Up</div></div>
+      <div className='grid justify-center mt-10'><div style={{fontFamily: 'Bulb'}} className='text-2xl text-blue-900 font-extrabold'>Sign Up</div></div>
     {/* Form Container */}
    
      <form onSubmit={handleSignUp}>

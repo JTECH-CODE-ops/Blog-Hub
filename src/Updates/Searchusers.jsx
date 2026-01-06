@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import supabase from '../supabaseClient';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Design.scss'
+import { IoSearchCircleSharp } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { MdVerified } from 'react-icons/md';
 
 const Searchusers = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +42,7 @@ const Searchusers = () => {
         try{
           const { data, error } = await supabase
           .from('profiles')
-          .select('id, user_name, avatar_url')
+          .select('id, user_name, avatar_url, Number, Badge, profile')
 
           if (error) {
             setError('Check your network connection!')
@@ -60,17 +62,17 @@ const Searchusers = () => {
         {/* Top Header */}
         <div>
         <Link to='/'><FaArrowLeft className='mb-3'/></Link>
-        <div className='flex justify-center'>
+        <div className='flex relative left-7 justify-center'>
             <form onSubmit={handleSearch}>
             <input 
             onClick={allSearch}
             value={searchTerm}
             onChange={(e) => {setSearchTerm(e.target.value); allSearch(e)}}
             type='text' 
-            className='outline-0 px-2 w-100 max-md:w-80 border-2'
+            className='outline-0 rounded-[20px] h-10 px-2 w-100 max-md:w-75 border-2'
             placeholder='Search for Users'
             />
-           <button className='px-2' type='submit'><FaSearch/></button>
+           <button className='relative right-11 top-[19px]' type='submit'><IoSearchCircleSharp className='text-5xl'/></button>
         </form>
         </div>
         </div>
@@ -84,14 +86,17 @@ const Searchusers = () => {
             {users.length == 0 && searchTerm.trim() !== '' && (
                 <div>User not found</div>
             )}
-            <ul>
+            <ul className='gap-10 grid justify-center'>
                 {users.map((user) => (
-                    <li key={user.id}>
+                    <li style={{backgroundColor: 'ghostwhite'}} className='w-[100vw] px-1 ml-6 text-black h-30 rounded-[12px]' key={user.id}>
                         <div className='flex gap-4 mt-4 items-center'>
                             <div>
                                 <img src={user.avatar_url} className='w-15 h-15 rounded-full'/>
                                 </div>
-                           <div className='text-xl font-bold'>{user.user_name}</div> 
+                           <div className='font-semibold'><div className='text-xl flex gap-2 items-center font-bold'>{user.user_name}{user.Badge ? (<div><MdVerified className="text-blue-600 text-xl"/></div>) : (<div></div>)}<div></div></div> 
+                           {user.Number}
+                           <div>{user.profile}</div>
+                           </div>
                             </div>
                     </li>
                 ))}

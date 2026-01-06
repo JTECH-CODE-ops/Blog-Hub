@@ -85,7 +85,7 @@ const { data: { user }} = await supabase.auth.getUser();
           .insert([
             {
               image_url: imageUrl,
-              Title: `${username} Updated his Profile Picture`,
+              Title: `${username} Updated Their Profile Picture`,
               user_id: user.id,  
               created_at: new Date().toISOString(),        
              },

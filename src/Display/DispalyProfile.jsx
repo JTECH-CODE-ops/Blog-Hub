@@ -3,18 +3,28 @@ import { useEffect, useState } from "react";
 import supabase from "../supabaseClient";
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa6";
+import { ImSpinner3 } from "react-icons/im";
 import './DisplayProfile.scss'
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime'
 import Like from '../Router/Like';
-import { FaPhoneSquareAlt } from "react-icons/fa";
-import { FaRegCommentAlt } from "react-icons/fa";
+import { FaPhoneSquareAlt, FaRegComment } from "react-icons/fa";
+import UserProfilePage from '../Display/DispalyProfile';
 import UserAvatar from '../Router/UserAvatar';
 import { IoMdCard } from "react-icons/io";
-import { MdVerified } from "react-icons/md";
+import { MdOutlineFileDownload, MdVerified } from "react-icons/md";
 import { TbDots } from "react-icons/tb";
+import ReadMoreToggle from "../Updates/ReadMoreToggle";
+import ManualShare from "../Updates/ManualShare";
+import Share from "../Updates/Share";
+import { ImCancelCircle } from "react-icons/im";
+
+dayjs.extend(relativeTime)
 
 const ProfilePage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
+   const [isImage, setIsImage] =  useState(null)
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
@@ -57,7 +67,29 @@ const ProfilePage = () => {
 
 
 
-  if (!user) return <p>Loading...</p>;
+  if (!user) return <div className="flex items-center gap-2 justify-center"><p className="text-2xl font-bold">Loading...</p><ImSpinner3 className="text-2xl animate-spin text-blue-600"/></div>;
+
+   const handleDownloadImage = async () => {
+        try{
+            const response = await fetch(isImage)
+            const blob = await response.blob()
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = 'Blog_Hub_File.jpg';
+            a.click();
+            URL.revokeObjectURL(url);
+        }catch (error) {
+            console.error(error)
+        }
+     }
+
+   const handleImageClick = (imageUrl) => {
+            setIsImage(imageUrl)
+        }
+        const handleCloseImage = () => {
+            setIsImage(null)
+        }
 
   return (
     <div className="otherMain">
@@ -83,33 +115,92 @@ const ProfilePage = () => {
     
      {/* Posts continue */}
      {posts.map((blog) => (
-      <div key={blog.id}>
-       
-     {/* profile name and image */}
-        <div className="flex items-center gap-4 mt-8 px-2">
-        <div><UserAvatar key={blog.id} user={blog.profiles} size={40} /></div>
-        <div className="font-bold flex items-center gap-2">{blog.profiles?.user_name}{user.Badge ? (<p><MdVerified className="text-blue-600"/></p>) : (<span></span>)}</div>
-        <div>
-        <Link to={`/ShowPhoto/${blog.user_id}`}><TbDots /></Link>
-      </div>
+      <div onClick={UserProfilePage} key={blog.id} className='h-[85vh] grid justify-center'>
+        {/* PostBackground */}
+        <div style={{backgroundColor: 'whitesmoke'}} className='w-[96vw] h-[78vh] rounded-[12px]'>
+          <div className='overflow-y-scroll h-[70vh] mb-3'>
+          {/* User-Id */}
+          <div className='flex gap-3 px-3 py-3'>
+            {/* <div><img src={User} className='w-10 rounded-full h-10'/> </div> */}
+            <div><UserAvatar key={blog.id} user={blog.profiles} size={40} /></div>
+            <div>
+              <div style={{fontFamily: 'Rosehot'}} className='font-extrabold '><Link className='' to={`/profile/${blog.user_id}`}><div className='flex items-center gap-2'>{blog.profiles?.user_name}{blog.profiles.Badge ? (<div><MdVerified className="text-blue-600 text-xl"/></div>) : (<div></div>)}</div></Link></div>
+              <div>{dayjs(blog.created_at).fromNow()}</div>
+            </div>
+            </div>
+            {/* Post Content */}
+            <div>
+              {/* Post Pic */}
+            <div className='grid justify-center'>
+              <div><img src={blog.image_url} onClick={() => handleImageClick(blog.image_url)} className='w-[90vw] h-[50vh]'/></div>
+            </div>
+            {isImage && (
+                      <div
+                        style={{
+                          position: 'fixed',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          zIndex: 1000,
+                        }}
+                      >
+                        <img src={isImage}  style={{ maxWidth: '90%', maxHeight: '100%' }} />
+                        <button
+                          onClick={handleCloseImage}
+                          style={{
+                            position: 'absolute',
+                            top: 28,
+                            right: 30,
+                            border: 'none',
+                            color: '#fff',
+                            fontSize: 30,
+                            cursor: 'pointer',
+                          }}
+                        >
+                         <ImCancelCircle />
+                        </button>
+                        <button
+                          onClick={handleDownloadImage}
+                          style={{
+                            position: 'absolute',
+                            top: 28,
+                            right: 80,
+                            backgroundColor: '',
+                            border: 'none',
+                            color: '#fff',
+                            fontSize: 30,
+                            cursor: 'pointer',
+                          }}
+                        >
+                        <MdOutlineFileDownload />
+                        </button>
+                      </div>
+                    )}
+            {/* Post Text */}
+            <div className='mt-2 px-2'>
+            <div style={{fontFamily: 'arial'}} className='text-xl font-semibold'>{blog.Title}</div>
+            <div className='text-xl'>   <a
+                  href={blog.Link}
+                  className='text-blue-700 underline'>{blog.Link} </a></div>
+            <button style={{fontFamily: 'Rosehot'}} className='mt-2'><ReadMoreToggle text={blog.Content} /></button>
+            </div>
+            </div>
         </div>
-        {/* Post continue */}
-        <div className="grid justify-center mt-4">
-        <div className="postBG overflow-y-scroll h-[40vh] w-[90vw]">
-        <div className="px-2 mt-2"><a href={blog.Link} className="text-blue-700 underline"></a></div> 
-        <div className="px-2 py-2 flex gap-15"><div>Posted {new Date(blog.created_at).toDateString()}</div><div className='font-bold text-blue-600'>{blog.is_pinned && 'Pinned'}</div></div>
-        <div className="px-2 font-bold text-xl">{blog.Title}</div>
-        <div className="px-2.5">{blog.Content}</div>
-        <div className="px-2 mt-2"><img src={blog.image_url} alt="No Image" className="w-[85vw] rounded-2xl h-[60vh]"/></div>
-      </div>
-      {/* Comment and Like */}
-      <div className="mt-3 gap-10 flex">
-      <div className="CL pl-4 pr-3 rounded-[4px] flex gap-2 items-center pt-1 pb-1"><Link to={`/post/${blog.id}/comments`}><FaRegCommentAlt/></Link>{blog?.comment_count || 0}</div>
-      <div className="CL pl-4 pr-3 rounded-[4px] pt-1 pb-1"><Like postId={blog.id} /></div>
-      </div>
-      </div>
-     </div>
-     ))}
+        {/* Comment Like Share Link */}
+        <div className='flex justify-center gap-11'>
+          <div className="py-1" style={{fontFamily: 'Rosehot'}}><Like postId={blog.id} /></div>
+           <Link to={`/post/${blog.id}/comments`}><div style={{fontFamily: 'Rosehot'}} className='flex items-center gap-2'><FaRegComment />{blog?.comment_count || 0}</div></Link>
+          <div style={{fontFamily: 'Rosehot'}}><Share post={blog} /></div>
+          <div style={{fontFamily: 'Rosehot'}}><ManualShare share={blog} /></div>
+        </div>
+        </div>
+        </div>
+        ))}
      
     </div>
   );

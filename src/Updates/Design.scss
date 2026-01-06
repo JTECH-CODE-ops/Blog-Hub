@@ -1,7 +1,5 @@
 
 .ForgotPassword{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: cadetblue;
     height: 100vh;
     display: grid;
     place-content: center;
@@ -35,14 +33,15 @@
         margin-left: 1rem;
         margin-right: 1rem;
         outline: none;
-        border-radius: 20px;
+        border-radius: 10px;
         padding: 5px 40px;
-        border: 3px solid rgb(37, 204, 37);
+        border: 3px solid gray;
     }
 
     button{
-        background-color: gold;
+        background-color: black;
         padding: 8px;
+        color: white;
         margin-left: 5.5rem;
         position: relative;
         font-family: Rosehot;

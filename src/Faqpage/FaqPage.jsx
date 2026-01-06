@@ -37,52 +37,52 @@ const BlogList = () => {
             {/* Top header */}
             <Link to='/'><FaArrowLeft/></Link>
             <div className='grid justify-center'>
-                <div className='px-27 text-[12px]'>Faq</div>
-                <div className='text-xl font-bold'>Frequently asked questions</div>
-                <div className='text-[10px] px-5'>Thousand questions, we will give you the answers</div>
+                <div style={{fontFamily: 'Rosehot'}} className='px-27 font-bold text-[15px]'>Faq</div>
+                <div style={{fontFamily: 'Bulb'}} className='text-blue-900 font-bold'>Frequently asked questions</div>
+                <div style={{fontFamily:'Rosehot'}} className='text-[10px] px-5'>Thousand questions, we will give you the answers</div>
             </div>
             {/* Body */}
-            <div className='grid justify-center FaqMain mt-5'>
+            <div className='grid text-blue-900 justify-center FaqMain mt-5'>
                 <div className='grid h-[70vh]'>
-                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>What is Bloghub and how can it help me? <div className='cursor-pointer' onClick={toggleDropdown}>{isOpen ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                    <div className='text-[14px] h-[15vh] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>What is Bloghub About ?<div className='cursor-pointer' onClick={toggleDropdown}>{isOpen ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
                         <div className={`py-4 ${isOpen ? 'block' : 'hidden'}`}>
-                    <ul className='font-light'>
-                        <li>Blog-Hub is a online social media article <br/>Posting platform to connect people Globally it is still in it t Phase</li>
+                    <ul className='font-semibold relative -top-2'>
+                        <li>Blog-Hub is a online social media platform <br/>For Posting All ind Of Content</li>
                         </ul>
                 </div>
                     </div>
-                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>What Support do we offer with your platform <div className='cursor-pointer' onClick={toggleDropdown1}>{isOpen1 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                    <div className='text-[14px] h-[15vh] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>What do we do ?<div className='cursor-pointer' onClick={toggleDropdown1}>{isOpen1 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
                         <div className={`py-4 ${isOpen1 ? 'block' : 'hidden'}`}>
-                    <ul className='font-light'>
-                        <li>Blog-Hub offers visibility, <br/>Blog-Hub makes you filled welcomed</li>
+                    <ul className='font-semibold relative -top-2'>
+                        <li>To be Honest,<br/>Blog-Hub was created to be Tested.</li>
                         </ul>
                 </div>
                     </div>
-                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>How Do i start using Blog-Hub <div className='cursor-pointer' onClick={toggleDropdown2}>{isOpen2 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                    <div className='text-[14px] h-[15vh] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>How Do i start using Blog-Hub ?<div className='cursor-pointer' onClick={toggleDropdown2}>{isOpen2 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
                         <div className={`py-4 ${isOpen2 ? 'block' : 'hidden'}`}>
-                    <ul className='font-light'>
-                        <li>Blog-Hub is a online social media article <br/>Posting platform to connect people Globally it is still in it testing Phase</li>
+                    <ul className='font-semibold relative -top-2'>
+                        <li>Simple Just Register,Login and start creating content, it's easy</li>
                         </ul>
                 </div>
                     </div>
-                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>Can i Connect with people in Blog-Hub <div className='cursor-pointer' onClick={toggleDropdown3}>{isOpen3 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                    <div className='text-[14px] h-[15vh] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>Can i Connect with people in Blog-Hub ?<div className='cursor-pointer' onClick={toggleDropdown3}>{isOpen3 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
                         <div className={`py-4 ${isOpen3 ? 'block' : 'hidden'}`}>
-                    <ul className='font-light'>
+                    <ul className='font-semibold relative -top-2'>
                         <li>Yes you can, and its very easy to do <br/>ALways make sure to post and be initiative</li>
                         </ul>
                 </div>
                     </div>
-                    <div className='text-[14px] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>Can i post Any Content on Blog Hub <div className='cursor-pointer' onClick={toggleDropdown4}>{isOpen4 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
+                    <div className='text-[14px] h-[15vh] font-bold rounded-[12px] mb-5 dropDown pl-4 pr-4'>Can i post Any Content on Blog Hub ?<div className='cursor-pointer' onClick={toggleDropdown4}>{isOpen4 ? <IoIosArrowDropup className='text-xl'/> : <IoIosArrowDropdown className='text-xl'/>}</div>
                         <div className={`py-4 ${isOpen4 ? 'block' : 'hidden'}`}>
-                    <ul className='font-light'>
-                        <li>Yes you can if your content is text,video or photo <br/>Blog-Hub will alow it, and always remember to post Good Content</li>
+                    <ul className='font-semibold relative -top-2'>
+                        <li>Yes you can if your content is Text,Video or Photo.</li>
                         </ul>
                 </div>
                     </div>
                     <div className='text-[14px] flex font-bold rounded-[12px] relative top-10 mb-5 dropDown1 pl-4 pr-4'>
                         <div>
                         <div className='py-2'>Still have a question?</div>
-                        <div className='text-[10px] font-light'>Can't find the answer to your question?<br/> Send us an email and we will get back<br/> to you as soon as possible.</div>
+                        <div className='text-[10px] font-semibold'>Can't find the answer to your question?<br/> Send us an email and we will get back<br/> to you as soon as possible.</div>
                     </div>
                    <Link to='/Contact'><div className='ml-8 mt-10'><button className='conFaq p-2 rounded-full'>Contact Us</button></div></Link> 
                     </div>
