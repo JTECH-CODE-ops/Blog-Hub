@@ -507,7 +507,7 @@ const Profile = () => {
         <div onClick={UserProfilePage} key={blog.id} className='h-[85vh] grid justify-center'>
           {/* PostBackground */}
           <div style={{fontFamily: 'Rosehot'}} className='font-bold text-xl text-blue-600'>{blog.is_pinned && <div className='flex items-center'><TbPinnedFilled/>Pinned</div>}</div>
-          <div style={{ backgroundColor: 'whitesmoke' }} className='w-[96vw] h-[78vh] rounded-[12px]'>
+          <div style={{ backgroundColor: 'whitesmoke' }} className='w-[96vw] md:w-[50vw] h-[78vh] rounded-[12px]'>
             <div className='overflow-y-scroll h-[70vh] mb-3'>
               {/* User-Id */}
               <div className='flex gap-3 px-3 py-3'>

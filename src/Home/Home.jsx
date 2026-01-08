@@ -251,10 +251,10 @@ const Home = () => {
     }
   }, [navigate]);
 
-  if(!user) return <div className='grid justify-center mt-[45vh]'>
-    <div><ImSpinner3 className='text-5xl relative ml-10 mb-5 animate-spin text-blue-600'/></div>
-    <Link to='/login'><button style={{backgroundColor: 'blue', fontFamily: 'Rosehot'}} className='font-bold flex items-center gap-2 text-white p-2 rounded-3xl'>Login Again<LuLogIn className='text-xl'/></button></Link>
-    </div>
+  // if(!user) return <div className='grid justify-center mt-[45vh]'>
+  //   <div><ImSpinner3 className='text-5xl relative ml-10 mb-5 animate-spin text-blue-600'/></div>
+  //   <Link to='/login'><button style={{backgroundColor: 'blue', fontFamily: 'Rosehot'}} className='font-bold flex items-center gap-2 text-white p-2 rounded-3xl'>Login Again<LuLogIn className='text-xl'/></button></Link>
+  //   </div>
 
   return (
     <div className='HomeMain'>
@@ -279,7 +279,14 @@ const Home = () => {
       </div>
       {/* Middle Header */}
       <div className='h-[77vh] overflow-y-scroll'>
-        {blogs.map((blog) => (
+        {blogs.length === 0 ?(
+          <div className='grid justify-center mt-20'>
+          <div className='h-50 w-80 rounded-[12px] grid justify-center' style={{backgroundColor:'whitesmoke'}}>
+            <div className='mt-20 grid justify-center'><ImSpinner6 className='text-4xl animate-spin text-blue-500'/></div>
+          <div style={{fontFamily:'Rosehot'}} className='font-semibold'>Checking For Updates .....</div>
+          </div>
+        </div>) :
+        (blogs.map((blog) => (
       <div onClick={UserProfilePage} key={blog.id} className='h-[85vh] grid justify-center'>
         {/* PostBackground */}
         <div style={{backgroundColor: 'whitesmoke'}} className='w-[96vw] md:w-[50vw] h-[78vh] rounded-[12px]'>
@@ -365,7 +372,7 @@ const Home = () => {
         </div>
         </div>
         </div>
-        ))}
+        )))}
         </div>
         {/* Bottom Header */}
       <div className='grid gap-10 grid-cols-5'>

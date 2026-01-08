@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import supabase from "../supabaseClient";
+import { ImSpinner6 } from "react-icons/im";
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa6";
+import { TbPinnedFilled } from "react-icons/tb";
 import { ImSpinner3 } from "react-icons/im";
 import './DisplayProfile.scss'
 import dayjs from 'dayjs';
@@ -47,7 +49,7 @@ const ProfilePage = () => {
     const fetchpostUser = async () => {
       const { data, error } = await supabase
         .from("blog_post_with_comment_counts")
-        .select(`*, profiles (id, user_name, avatar_url)`)
+        .select(`*, profiles (id, user_name, avatar_url, Badge)`)
         .eq('user_id', userId)
         .not('Title', 'is', null)
         .order('is_pinned', { ascending: false })
@@ -67,7 +69,13 @@ const ProfilePage = () => {
 
 
 
-  if (!user) return <div className="flex items-center gap-2 justify-center"><p className="text-2xl font-bold">Loading...</p><ImSpinner3 className="text-2xl animate-spin text-blue-600"/></div>;
+  if (!user) return <div className='grid justify-center mt-20'>
+            <div className='h-50 w-80 rounded-[12px] grid justify-center' style={{backgroundColor:'whitesmoke'}}>
+              <div className='mt-20 grid justify-center'><ImSpinner6 className='text-4xl animate-spin text-blue-500'/></div>
+            <div style={{fontFamily:'Rosehot'}} className='font-semibold'>Loading Profile ......</div>
+            </div>
+          </div>
+  
 
    const handleDownloadImage = async () => {
         try{
@@ -102,7 +110,7 @@ const ProfilePage = () => {
     </div>
     {/* background Profie */}
     <div className="grid justify-center rounded-[15px] otherMain1 h-[67.5vh]">
-     <div className="Userbg h-[20vh] w-[100vw] border-b-4 border-b-white rounded-[20px]">
+     <div className="Userbg h-[20vh] md:w-[50vw] w-[100vw] border-b-4 border-b-white rounded-[20px]">
       <div className="px-8 mt-10">
         <div className="w-45 "><img src={user.avatar_url} className="rounded-full w-24 h-25 border-4 border-white"/></div>
         <div className="text-3xl font-extrabold flex items-center gap-4 text-white">@{user.user_name}{user.Badge ? (<p><MdVerified className="text-blue-600"/></p>) : (<span></span>)}</div>
@@ -117,7 +125,8 @@ const ProfilePage = () => {
      {posts.map((blog) => (
       <div onClick={UserProfilePage} key={blog.id} className='h-[85vh] grid justify-center'>
         {/* PostBackground */}
-        <div style={{backgroundColor: 'whitesmoke'}} className='w-[96vw] h-[78vh] rounded-[12px]'>
+        <div style={{fontFamily: 'Rosehot'}} className='font-bold text-xl text-blue-600'>{blog.is_pinned && <div className='flex items-center'><TbPinnedFilled/>Pinned</div>}</div>
+        <div style={{backgroundColor: 'whitesmoke'}} className='w-[96vw] md:w-[50vw] h-[78vh] rounded-[12px]'>
           <div className='overflow-y-scroll h-[70vh] mb-3'>
           {/* User-Id */}
           <div className='flex gap-3 px-3 py-3'>

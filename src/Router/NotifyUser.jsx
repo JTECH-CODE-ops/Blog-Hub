@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import supabase from '../supabaseClient'
 import { BiSolidBellRing } from "react-icons/bi";
-import { IoNotifications } from "react-icons/io5";
+import { IoCheckmarkDoneSharp, IoNotifications } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { GoDotFill } from "react-icons/go";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from 'react-toastify';
+import { ImSpinner6 } from 'react-icons/im';
+import { LuCheck, LuCheckCheck } from 'react-icons/lu';
 
 const NotifyUser = () => {
   const [notifications, setNotifications] = useState([])
@@ -113,9 +115,15 @@ const NotifyUser = () => {
         
         </div>
     <div className='read'>
-      <h1 className='mb-2'>Unread Notifications ({unreadNotifications.length})</h1>
+      <h1 className='mb-2 text-black gap-2 flex items-center'>Unread Notifications ({unreadNotifications.length}) <LuCheck /></h1>
       {notifications.length === 0 ? (
-        <p className='noNotify'>You Have No Notification <BiSolidBellRing className='mt-2 text-blue-500 animate-bounce'/></p>
+        
+        <div className='grid justify-center mt-20'>
+                    <div className='h-50 w-80 rounded-[12px] grid justify-center' style={{backgroundColor:'whitesmoke'}}>
+                      <div className='mt-20 grid justify-center'><ImSpinner6 className='text-4xl animate-spin text-blue-500'/></div>
+                    <div style={{fontFamily:'Rosehot'}} className='font-semibold'>Loading Notifications ...</div>
+                    </div>
+                  </div>
       ) : ( 
           unreadNotifications.map((notify) => (
         <div className='flex items-center gap-[10px] mb-5' key={notify.id} >
@@ -126,9 +134,9 @@ const NotifyUser = () => {
       )))}
     </div>
     <div className='read'>
-      <h1>Read Notifications ({readNotifications.length})</h1>
+      <h1 className='flex items-center text-black gap-2'>Read Notifications ({readNotifications.length}) <LuCheckCheck /></h1>
       {notifications.length === 0 ? (
-        <p className='noNotify'>You Have No Notification <BiSolidBellRing className='mt-2 text-blue-500 animate-bounce'/></p>
+        <p></p>
       ) : ( 
           readNotifications.map((notify) => (
         <div className='flex items-center gap-[10px] mb-5' key={notify.id} >

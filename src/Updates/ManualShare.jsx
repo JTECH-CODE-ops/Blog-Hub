@@ -8,7 +8,7 @@ const ManualShare = ({share}) => {
           try {
             await navigator.share({
               title: share.title,
-              url: `http://localhost:5173/posts/${share.id}`
+              url: `https://bloghubcom.netlify.app/posts/${share.id}`
             })
           }catch (error) {
             toast.error('Error sharing Post', error)
